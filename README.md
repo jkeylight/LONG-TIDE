@@ -670,27 +670,9 @@ motion.
 
 ---
 
-## ⚠ Before this goes live — three things that are not true yet
+## ⚠ 
 
-**1. The portrait is not Poonam.** `assets/img/practitioner.jpg` is a
-generated placeholder image of a different woman. It is now captioned with a
-real person's name, which is misleading and could be a right-of-publicity
-problem. Replace the file at that path with her own photograph — same
-filename, no code change needed — or tell me to swap in an abstract
-placeholder until she has one.
-
-**2. `RCST, BCST` are specific professional credentials.** They appear on the
-About page and in the homepage masthead. If Poonam does not hold those exact
-letters from those exact bodies, they must be corrected or removed. The
-disclaimer page makes a point of saying such letters come from voluntary
-bodies, not the state — which makes an inaccurate claim here worse, not
-smaller.
-
-**3. The contact details are still placeholders.** Email is
-`hello@example.com`, the phone is `Phone number`, and the address is
-`Street address`. The form cannot deliver enquiries until
-`SITE.formEndpoint` is set, so every enquiry currently falls back to opening
-the visitor's mail client. That works, but it lands in an example address.
+**1. 
 
 | Still a placeholder | Where |
 |---|---|
