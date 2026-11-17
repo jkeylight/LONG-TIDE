@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Accessibility — Long Tide</title>
+<meta name="description" content="How this website works for people using screen readers, keyboards and reduced motion — and an honest account of what still falls short.">
+<meta name="theme-color" content="#080706">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080706'/%3E%3Cg fill='none' stroke='%23EDE9E0' stroke-width='1'%3E%3Ccircle cx='16' cy='16' r='2' fill='%23B24B2C' stroke='none'/%3E%3Cpath d='M11.2 16a4.8 4.8 0 0 1 4.8-4.8M20.8 16a4.8 4.8 0 0 1-4.8 4.8'/%3E%3Cpath d='M6.6 16a9.4 9.4 0 0 1 9.4-9.4M25.4 16a9.4 9.4 0 0 1-9.4 9.4'/%3E%3C/g%3E%3C/svg%3E">
+<script>
+(function () {
+  var d = document.documentElement;
+  d.classList.add('first-frame');
+  try {
+    var arrived = sessionStorage.getItem('sp:nav') === '1';
+    /* the panel is claimed here, synchronously, so it is covering at first
+       paint — not after a script has had time to run */
+    if (!arrived) d.classList.add('is-loading');
+    if (arrived) {
+      sessionStorage.removeItem('sp:nav');
+      window.SP_ARRIVED = true;
+      d.classList.add('nav-in');
+      /* if any module fails to run, the page must never stay covered */
+      setTimeout(function () { d.classList.remove('nav-in'); }, 3000);
+    }
+  } catch (e) {}
+})();
+</script>
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/core.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+<div class="preloader" aria-hidden="true">
+  <span class="preloader__word">still</span>
+  <span class="preloader__rule" aria-hidden="true"></span>
+  <span class="preloader__count">000</span>
+</div>
+<div class="curtain" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="atmos" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<canvas id="atmos-canvas" aria-hidden="true"></canvas>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<aside class="rail" aria-label="Site">
+  <a class="rail__mark" href="index.html"><span>Long Tide</span></a>
+  <button class="rail__toggle" data-open-index aria-expanded="false">Index</button>
+  <span class="rail__index">DOC — 04</span>
+</aside>
+
+<div class="index" id="index" role="dialog" aria-modal="true" aria-label="Index">
+  <div class="index__top">
+    <span class="mono mono--wide" style="color:var(--text-60)">Long Tide — Index</span>
+    <button class="index__close">Close</button>
+  </div>
+  <nav class="index__body" aria-label="Primary">
+    <a class="index__link" href="index.html"><span class="n">01</span><span class="t">The Inscription</span><span class="m">Enter</span></a>
+    <a class="index__link" href="the-work.html"><span class="n">02</span><span class="t">The Work</span><span class="m">Doctrine</span></a>
+    <a class="index__link" href="sessions.html"><span class="n">03</span><span class="t">Sessions</span><span class="m">Practice</span></a>
+    <a class="index__link" href="about.html"><span class="n">04</span><span class="t">The Practitioner</span><span class="m">Lineage</span></a>
+    <a class="index__link" href="resources.html"><span class="n">05</span><span class="t">Resources</span><span class="m">Archive</span></a>
+    <a class="index__link" href="contact.html"><span class="n">06</span><span class="t">Contact</span><span class="m">Threshold</span></a>
+  </nav>
+  <nav class="index__legal" aria-label="Reference">
+    <a href="understanding.html">Understanding the work</a>
+    <a href="the-room.html">The room</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="disclaimer.html">Medical disclaimer</a>
+    <a href="terms.html">Terms</a>
+    <a href="accessibility.html">Accessibility</a>
+  </nav>
+  <div class="index__foot">
+    <span class="mono mono--sm" style="color:var(--text-20)"><span data-site="city">Mumbai</span></span>
+    <span class="mono mono--sm" style="color:var(--text-20)">Est. <span data-site="founded">2019</span></span>
+  </div>
+</div>
+
+<main id="main">
+
+<section class="doc" aria-labelledby="doc-title">
+  <header class="doc__head">
+    <p class="doc__eyebrow">Legal &middot; 04</p>
+    <h1 class="doc__h" id="doc-title">Accessibility</h1>
+    <div class="doc__meta"><span>Version 1.0</span><span>Reviewed <time datetime="2026-11-16">16 November 2026</time></span><span>Target: WCAG 2.2 AA</span></div>
+    <div class="doc__rule"></div>
+  </header>
+
+  <div class="doc__grid">
+    <article class="doc__body">
+
+      <p class="doc__note">This site was built to be read by everyone who needs it, and it tries to meet
+      <strong>WCAG 2.2 level AA</strong>. Below is what has been done, and &mdash; more usefully &mdash; what has not.</p>
+
+      <h2 id="commitment">01 &middot; Commitment</h2>
+      <p>Accessibility is not a feature bolted on at the end. For a therapy practice it matters more than usual: someone
+      looking for help is quite likely to be in pain, exhausted, anxious or using a screen reader on a bad day. A site
+      that is tiring to use is a site that turns people away.</p>
+
+      <h2 id="done">02 &middot; What has been done</h2>
+      <ul>
+        <li><strong>Reduced motion is honoured throughout.</strong> Under
+        <code>prefers-reduced-motion: reduce</code> the preloader, the page wipe, the custom cursor, every scroll
+        animation and the 3D atmosphere are all switched off, and content appears in its final state.</li>
+        <li><strong>Nothing depends on JavaScript to be readable.</strong> Every animation is applied by script; if
+        scripting fails, the page is simply already visible. This was tested with scripting disabled entirely.</li>
+        <li><strong>Keyboard everywhere.</strong> The index overlay opens, closes on Escape, returns focus, and every
+        control has a visible focus ring drawn in the accent colour against the dark background.</li>
+        <li><strong>Semantic structure.</strong> One <code>h1</code> per page, a single <code>main</code>, landmarks,
+        lists that are lists, and headings that do not skip levels.</li>
+        <li><strong>Images described.</strong> Every image carries meaningful alternative text; decorative layers are
+        hidden from assistive technology.</li>
+        <li><strong>Forms labelled.</strong> Every field has a real <code>label</code>, errors are tied to their field
+        with <code>aria-describedby</code>, and status messages are announced through a live region.</li>
+        <li><strong>No reliance on colour alone.</strong> Errors are marked with text and an outline, not only with the
+        accent colour.</li>
+        <li><strong>No time limits, no autoplaying audio, no carousels.</strong></li>
+      </ul>
+
+      <h2 id="limits">03 &middot; Known limitations</h2>
+      <p>Being straight about this is more useful than a badge:</p>
+      <ul>
+        <li><strong>Some small metadata text is below AA contrast.</strong> The faint letter-spaced labels used as
+        decoration &mdash; volume numbers, marginalia, hairline captions &mdash; sit between 1.6:1 and 3.3:1 against the
+        background. Body text and all legal text meet 4.5:1. Raising the decorative labels to 4.5:1 is possible but
+        would visibly flatten the design, so it has not been done by default. If you find them hard to read, tell me and
+        I will raise them.</li>
+        <li><strong>The design is motion-first.</strong> Reduced motion removes the animation, but the aesthetic is a
+        dark, high-contrast, typographic one. If reading light text on a near-black field is uncomfortable, your
+        browser's own reader mode or a high-contrast setting will override it.</li>
+        <li><strong>No audio description or captions</strong>, because the site carries no video with speech.</li>
+        <li><strong>The custom cursor is decorative only.</strong> It is disabled on touch and coarse pointers, and no
+        action depends on it.</li>
+      </ul>
+
+      <h2 id="testing">04 &middot; How this was tested</h2>
+      <p>Automated checks of heading structure, alternative text, form labelling, horizontal overflow, focus order and
+      console errors across all pages at desktop and mobile widths; manual keyboard-only passes; and a full run with
+      JavaScript disabled and with reduced motion enabled. Automated tools catch a minority of real problems, so this
+      page does not claim they caught everything.</p>
+
+      <h2 id="tell">05 &middot; If something does not work</h2>
+      <p>If any part of this site prevents you from doing what you came to do, please tell me. Email
+      <a href="mailto:poonam@craniosacraltherapy.com" data-site-href="email" data-site="email">poonam@craniosacraltherapy.com</a> or telephone
+      <a href="tel:+919987894488" data-site-href="phone" data-site="phone">+91 99878 94488</a>. Describe what happened in whatever way is
+      easiest for you &mdash; there is no form to fill in and no wrong way to say it.</p>
+      <p>I will try to fix it, and if the site cannot be made to work for you, I will arrange another way to give you the
+      same information.</p>
+
+    </article>
+
+    <nav class="doc__toc" aria-label="Contents of this document">
+      <p>On this page</p>
+      <ol>
+        <li><a href="#commitment">Commitment</a></li>
+        <li><a href="#done">What has been done</a></li>
+        <li><a href="#limits">Known limitations</a></li>
+        <li><a href="#testing">How this was tested</a></li>
+        <li><a href="#tell">Tell me what is broken</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__line">
+      <span class="foot__id">Long&nbsp;Tide</span>
+      <span class="foot__status"><span class="foot__dot"></span>Craniosacral therapy &middot; <span data-site="city">Mumbai</span> &middot; Est. <span data-site="founded">2019</span></span>
+      <span class="foot__status" data-clock>&mdash;</span>
+    </div>
+    <p class="foot__legal">
+      Craniosacral therapy is a complementary modality. It is not a substitute for medical diagnosis, treatment or emergency care. Information on this site is general and is not medical advice. Consult a qualified healthcare professional about your own circumstances.
+    </p>
+    <nav class="foot__nav" aria-label="Legal and accessibility">
+      <a href="privacy.html">Privacy</a>
+      <a href="disclaimer.html">Medical disclaimer</a>
+      <a href="terms.html">Terms</a>
+      <a href="accessibility.html">Accessibility</a>
+    </nav>
+
+    <div class="foot__colophon">
+      <p class="foot__made">
+        Made with
+        <svg class="foot__heart" viewBox="0 0 24 24" role="img" aria-label="love" focusable="false"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        by <span data-site="designer">Norman James</span> @ <span data-site="studio">Empathy Studio</span>
+      </p>
+      <p class="foot__copy">&copy; <span data-year>2026</span> <span data-site="practitioner">Poonam Mahendra</span>. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+<script src="assets/vendor/three.min.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/split-text.js"></script>
+<script src="assets/js/cursor.js"></script>
+<script src="assets/js/preloader.js"></script>
+<script src="assets/js/lenis-init.js"></script>
+<script src="assets/js/animations.js"></script>
+<script src="assets/js/transitions.js"></script>
+<script src="assets/js/atmos.js"></script>
+<script src="assets/js/form.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/page.js"></script>
+</body>
+</html>

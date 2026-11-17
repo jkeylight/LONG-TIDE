@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Understanding the Work — Long Tide, Craniosacral Therapy in Mumbai</title>
+<meta name="description" content="What craniosacral practitioners mean by a fulcrum, a tide and a still point — the ideas behind the work, explained plainly for anyone, without the jargon.">
+<meta name="theme-color" content="#080706">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080706'/%3E%3Cg fill='none' stroke='%23EDE9E0' stroke-width='1'%3E%3Ccircle cx='16' cy='16' r='2' fill='%23B24B2C' stroke='none'/%3E%3Cpath d='M11.2 16a4.8 4.8 0 0 1 4.8-4.8M20.8 16a4.8 4.8 0 0 1-4.8 4.8'/%3E%3Cpath d='M6.6 16a9.4 9.4 0 0 1 9.4-9.4M25.4 16a9.4 9.4 0 0 1-9.4 9.4'/%3E%3C/g%3E%3C/svg%3E">
+<script>
+(function () {
+  var d = document.documentElement;
+  d.classList.add('first-frame');
+  try {
+    var arrived = sessionStorage.getItem('sp:nav') === '1';
+    /* the panel is claimed here, synchronously, so it is covering at first
+       paint — not after a script has had time to run */
+    if (!arrived) d.classList.add('is-loading');
+    if (arrived) {
+      sessionStorage.removeItem('sp:nav');
+      window.SP_ARRIVED = true;
+      d.classList.add('nav-in');
+      /* if any module fails to run, the page must never stay covered */
+      setTimeout(function () { d.classList.remove('nav-in'); }, 3000);
+    }
+  } catch (e) {}
+})();
+</script>
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/core.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+<div class="preloader" aria-hidden="true">
+  <span class="preloader__word">still</span>
+  <span class="preloader__rule" aria-hidden="true"></span>
+  <span class="preloader__count">000</span>
+</div>
+<div class="curtain" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="atmos" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<canvas id="atmos-canvas" aria-hidden="true"></canvas>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<aside class="rail" aria-label="Site">
+  <a class="rail__mark" href="index.html"><span>Long Tide</span></a>
+  <button class="rail__toggle" data-open-index aria-expanded="false">Index</button>
+  <span class="rail__index">REF — 01</span>
+</aside>
+
+<div class="index" id="index" role="dialog" aria-modal="true" aria-label="Index">
+  <div class="index__top">
+    <span class="mono mono--wide" style="color:var(--text-60)">Long Tide — Index</span>
+    <button class="index__close">Close</button>
+  </div>
+  <nav class="index__body" aria-label="Primary">
+    <a class="index__link" href="index.html"><span class="n">01</span><span class="t">The Inscription</span><span class="m">Enter</span></a>
+    <a class="index__link" href="the-work.html"><span class="n">02</span><span class="t">The Work</span><span class="m">Doctrine</span></a>
+    <a class="index__link" href="sessions.html"><span class="n">03</span><span class="t">Sessions</span><span class="m">Practice</span></a>
+    <a class="index__link" href="about.html"><span class="n">04</span><span class="t">The Practitioner</span><span class="m">Lineage</span></a>
+    <a class="index__link" href="resources.html"><span class="n">05</span><span class="t">Resources</span><span class="m">Archive</span></a>
+    <a class="index__link" href="contact.html"><span class="n">06</span><span class="t">Contact</span><span class="m">Threshold</span></a>
+  </nav>
+  <nav class="index__legal" aria-label="Reference">
+    <a href="understanding.html">Understanding the work</a>
+    <a href="the-room.html">The room</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="disclaimer.html">Medical disclaimer</a>
+    <a href="terms.html">Terms</a>
+    <a href="accessibility.html">Accessibility</a>
+  </nav>
+  <div class="index__foot">
+    <span class="mono mono--sm" style="color:var(--text-20)"><span data-site="city">Mumbai</span></span>
+    <span class="mono mono--sm" style="color:var(--text-20)">Est. <span data-site="founded">2019</span></span>
+  </div>
+</div>
+
+<main id="main">
+
+<section class="uo" aria-labelledby="uo-title">
+  <header class="uo__head">
+    <p class="uo__kicker">Reference &middot; 01</p>
+    <h1 class="uo__title" id="uo-title">Understanding <em>the work</em></h1>
+    <p class="uo__standfirst">The ideas behind craniosacral therapy, in plain language.
+    Six short sections &mdash; about three minutes, no training required.</p>
+    <p class="uo__honest">
+      <span class="uo__honestLabel">Please read this first</span>
+      This page describes how practitioners <em>think</em> about the body. It is a model, not a
+      claim about mechanism: none of it has been proven, and none of it is medical advice.
+      If you are deciding whether to try the work, the
+      <a href="disclaimer.html">medical disclaimer</a> is the page that matters.
+    </p>
+  </header>
+
+  <div class="uo__grid">
+    <nav class="uo__rail" aria-label="Depth of this page">
+      <p class="uo__railTitle">From surface<br>to depth</p>
+      <ol>
+        <li><a class="uo__stop" href="#surface" data-depth="0"><span class="uo__tick" aria-hidden="true"></span>The whole in every part</a></li>
+        <li><a class="uo__stop" href="#fascia" data-depth="1"><span class="uo__tick" aria-hidden="true"></span>One continuous fabric</a></li>
+        <li><a class="uo__stop" href="#structure" data-depth="2"><span class="uo__tick" aria-hidden="true"></span>Two ways of being stuck</a></li>
+        <li><a class="uo__stop" href="#nerves" data-depth="3"><span class="uo__tick" aria-hidden="true"></span>When everything fires at once</a></li>
+        <li><a class="uo__stop" href="#tide" data-depth="4"><span class="uo__tick" aria-hidden="true"></span>Why we do not go into the middle</a></li>
+        <li><a class="uo__stop" href="#stillness" data-depth="5"><span class="uo__tick" aria-hidden="true"></span>What actually happens in a session</a></li>
+      </ol>
+    </nav>
+
+    <article class="uo__body">
+
+      <section class="uo__sec" id="surface" data-depth="0">
+        <p class="uo__eyebrow">01</p>
+        <h2 class="uo__h2">The whole in every part</h2>
+        <figure class="uo__fig uo__fig--pair">
+        <div class="uo__figArt"><svg class="uo__svg" viewBox="0 0 366 120" role="img" aria-labelledby="fig1t">
+          <title id="fig1t">A whole plate, then the same plate cut into four, each piece still carrying the whole pattern.</title>
+          <g fill="none" stroke="currentColor">
+            <rect x="2" y="1" width="118" height="118" stroke-opacity=".8"/>
+            <g stroke-opacity=".42">
+              <circle cx="61" cy="60" r="44"/><circle cx="61" cy="60" r="31"/>
+              <circle cx="61" cy="60" r="19"/><circle cx="61" cy="60" r="8"/>
+            </g>
+            <g stroke-opacity=".3"><path d="M160 60h30"/><path d="M183 55l7 5-7 5"/></g>
+            <g stroke-opacity=".42">
+              <rect x="228" y="3" width="54" height="54"/><rect x="288" y="3" width="54" height="54"/>
+              <rect x="228" y="63" width="54" height="54"/><rect x="288" y="63" width="54" height="54"/>
+              <circle cx="255" cy="30" r="20"/><circle cx="255" cy="30" r="14"/>
+              <circle cx="255" cy="30" r="8"/><circle cx="255" cy="30" r="3.2"/>
+              <circle cx="315" cy="30" r="20"/><circle cx="315" cy="30" r="14"/>
+              <circle cx="315" cy="30" r="8"/><circle cx="315" cy="30" r="3.2"/>
+              <circle cx="255" cy="90" r="20"/><circle cx="255" cy="90" r="14"/>
+              <circle cx="255" cy="90" r="8"/><circle cx="255" cy="90" r="3.2"/>
+              <circle cx="315" cy="90" r="20"/><circle cx="315" cy="90" r="14"/>
+              <circle cx="315" cy="90" r="8"/><circle cx="315" cy="90" r="3.2"/>
+            </g>
+          </g>
+          <circle cx="61" cy="60" r="2.6" class="uo__accent"/>
+        </svg></div>
+        <div class="uo__figCaps">
+          <p class="uo__cap"><b>one plate</b></p>
+          <p class="uo__cap"><b>cut into four, each still whole</b></p>
+        </div>
+      </figure>
+        <div class="uo__prose">
+      <p class="uo__lead">Cut a hologram in half and you do not get two half-pictures. You get two whole pictures, each a little softer.</p>
+      <p>The body behaves a little like this. The same pattern of health is present everywhere in it &mdash; not stored in one place, but written through all of it. That is why work at the base of the skull can change how someone stands, and why a sore shoulder is sometimes not about the shoulder at all.</p>
+      <p class="uo__caveat">A way of looking at the body, not a claim about how it works &mdash; nobody has shown that the body is a hologram.</p>
+    </div>
+      </section>
+      <section class="uo__sec" id="fascia" data-depth="1">
+        <p class="uo__eyebrow">02</p>
+        <h2 class="uo__h2">One continuous fabric</h2>
+        <figure class="uo__fig uo__fig--pair">
+        <p class="uo__figMid">one continuous sheet, no join</p>
+        <div class="uo__figArt"><svg class="uo__svg" viewBox="0 0 560 76" role="img" aria-labelledby="fig2t">
+          <title id="fig2t">One continuous band running from the base of the skull to the sacrum, anchored at both ends, with no join in between.</title>
+          <path d="M30 20C180 14 380 14 530 20L530 54C380 60 180 60 30 54Z"
+                fill="currentColor" fill-opacity=".05" stroke="currentColor" stroke-opacity=".42"/>
+          <g stroke="currentColor" stroke-opacity=".16">
+            <path d="M110 26v22"/><path d="M180 24v26"/><path d="M250 23v28"/>
+            <path d="M320 23v28"/><path d="M390 24v26"/><path d="M460 26v22"/>
+          </g>
+          <g fill="none" stroke="currentColor">
+            <circle cx="30" cy="37" r="9" class="uo__accent-ring"/>
+            <circle cx="530" cy="37" r="9" class="uo__accent-ring"/>
+          </g>
+          <circle cx="30" cy="37" r="3.4" class="uo__accent"/>
+          <circle cx="530" cy="37" r="3.4" class="uo__accent"/>
+        </svg></div>
+        <div class="uo__figCaps">
+          <p class="uo__cap"><b>anchored at the base of the skull</b><span>the sphenobasilar junction and the rim of the foramen magnum</span></p>
+          <p class="uo__cap"><b>anchored at the sacrum</b><span>the second segment, near the base of the spine</span></p>
+        </div>
+      </figure>
+        <div class="uo__prose">
+      <p>The membrane that wraps your brain does not stop at the base of your skull.</p>
+      <p>It continues down as a tube around your spinal cord and anchors at your sacrum. Two firm attachments, one continuous sheet. Head and pelvis are not two things joined by a neck &mdash; mechanically, they are one piece of cloth with a head on top of it.</p>
+      <p>Practitioners work at either end. What happens at one end is felt at the other.</p>
+    </div>
+      </section>
+      <section class="uo__sec" id="structure" data-depth="2">
+        <p class="uo__eyebrow">03</p>
+        <h2 class="uo__h2">Two ways of being stuck</h2>
+        <figure class="uo__fig uo__fig--pair">
+        <div class="uo__figArt"><svg class="uo__svg" viewBox="0 0 560 124" role="img" aria-labelledby="fig3t">
+          <title id="fig3t">Left: a balance point on a moving wave, in three positions. Right: a balance point clamped to a fixed line.</title>
+          <g fill="none" stroke="currentColor">
+            <path d="M20 112c40 0 40-56 80-56s40 56 80 56 40-56 80-56" stroke-opacity=".5"/>
+            <circle cx="100" cy="56" r="5" class="uo__accent-ring"/>
+            <circle cx="180" cy="112" r="4" stroke-opacity=".3"/>
+            <circle cx="260" cy="56" r="4" stroke-opacity=".3"/>
+            <path d="M330 84h190" stroke-opacity=".3"/>
+            <circle cx="425" cy="84" r="9" class="uo__accent-ring"/>
+            <g stroke-opacity=".26"><path d="M411 66v36"/><path d="M439 66v36"/></g>
+          </g>
+          <circle cx="100" cy="56" r="3.2" class="uo__accent"/>
+          <circle cx="425" cy="84" r="3.2" class="uo__accent"/>
+        </svg></div>
+        <div class="uo__figCaps">
+          <p class="uo__cap"><b>a balance point that moves</b><span>the healthy state</span></p>
+          <p class="uo__cap"><b>a balance point that will not</b><span>what injury leaves behind</span></p>
+        </div>
+      </figure>
+        <div class="uo__prose">
+      <p>A <em>fulcrum</em> is simply the point a system organises itself around.</p>
+      <p>In a healthy body it moves. You shift your weight and the balance point shifts with you; the system keeps finding a new centre.</p>
+      <p>After an injury or a long strain, a second kind appears: a point that does not move. The body organises itself around it and stops shifting. Physically it feels like a knot. The system has built itself around a place that hurts, in order to protect it.</p>
+      <p>Most of what a practitioner is feeling for is this &mdash; not the sore place itself, but the point the body has decided to organise around.</p>
+    </div>
+      </section>
+      <section class="uo__sec" id="nerves" data-depth="3">
+        <p class="uo__eyebrow">04</p>
+        <h2 class="uo__h2">When everything fires at once</h2>
+        <figure class="uo__fig uo__fig--stack">
+        <div class="uo__figArt"><svg class="uo__svg uo__svg--tall" viewBox="0 0 84 260" role="img" aria-labelledby="fig4t">
+          <title id="fig4t">Five parts of one experience on a closed rail, so that touching any one of them starts the whole circuit.</title>
+          <g fill="none" stroke="currentColor" stroke-opacity=".26">
+            <path d="M70 10v240"/>
+            <path d="M70 250C32 250 26 205 26 130S32 10 70 10"/>
+          </g>
+          <g stroke="currentColor" stroke-opacity=".18"><path d="M70 40h12"/><path d="M70 100h12"/><path d="M70 160h12"/><path d="M70 220h12"/></g>
+          <circle cx="70" cy="10" r="4.6" class="uo__accent"/>
+          <g fill="currentColor" opacity=".5">
+            <circle cx="70" cy="70" r="4"/><circle cx="70" cy="130" r="4"/>
+            <circle cx="70" cy="190" r="4"/><circle cx="70" cy="250" r="4"/>
+          </g>
+        </svg><svg class="uo__svg uo__svg--narrow" viewBox="0 0 560 80" role="img" aria-labelledby="fig4t-n">
+          <title id="fig4t-n">Five parts of one experience on a closed rail, so that touching any one of them starts the whole circuit.</title>
+          <g fill="none" stroke="currentColor" stroke-opacity=".26">
+            <path d="M20 54H540"/>
+            <path d="M540 54C540 22 20 22 20 54"/>
+          </g>
+          <circle cx="20" cy="54" r="5" class="uo__accent"/>
+          <g fill="currentColor" opacity=".5">
+            <circle cx="150" cy="54" r="5"/><circle cx="280" cy="54" r="5"/>
+            <circle cx="410" cy="54" r="5"/><circle cx="540" cy="54" r="5"/>
+          </g>
+        </svg></div>
+        <ul class="uo__keys">
+          <li><b>a sensation</b><span>sweating, a racing heart</span></li>
+          <li><b>an image</b><span>a fragment of what happened</span></li>
+          <li><b>a feeling</b><span>terror, rage</span></li>
+          <li><b>an impulse</b><span>to run, to freeze</span></li>
+          <li><b>a meaning</b><span>&ldquo;I am going to die&rdquo;</span></li>
+        </ul>
+      </figure>
+        <div class="uo__prose">
+      <p>Trauma is not only a memory. It is usually several things welded together:</p>
+      <p>Normally these stay somewhat separate and can be felt one at a time. After trauma they fuse, and any one of them sets off all the others at once. Someone smells something ordinary and their heart is pounding before they can think.</p>
+      <p>The work is not to break the chain, but to loosen it &mdash; so the parts can be felt separately again.</p>
+    </div>
+      </section>
+      <section class="uo__sec" id="tide" data-depth="4">
+        <p class="uo__eyebrow">05</p>
+        <h2 class="uo__h2">Why we do not go into the middle</h2>
+        <figure class="uo__fig uo__fig--pair">
+        <div class="uo__figArt"><svg class="uo__svg" viewBox="0 0 312 120" role="img" aria-labelledby="fig5t">
+          <title id="fig5t">A figure of eight whose two loops are the edge of what is difficult and the edge of what is fine.</title>
+          <g fill="none" stroke="currentColor">
+            <path d="M40 60C40 6 110 6 156 60c46 54 116 54 116 0 0-54-70-54-116 0-46 54-116 54-116 0z" stroke-opacity=".5"/>
+            <circle cx="40" cy="60" r="10" class="uo__accent-ring"/>
+            <circle cx="272" cy="60" r="10" stroke-opacity=".3"/>
+          </g>
+          <circle cx="40" cy="60" r="3.6" class="uo__accent"/>
+          <circle cx="272" cy="60" r="3.6" fill="currentColor" opacity=".45"/>
+        </svg></div>
+        <div class="uo__figCaps">
+          <p class="uo__cap"><b>the edge of what is fine</b></p>
+          <p class="uo__cap"><b>the edge of what is difficult</b></p>
+        </div>
+        <p class="uo__figNote">Touch, return, touch again &mdash; widening the safe side a little on each pass.</p>
+      </figure>
+        <div class="uo__prose">
+      <p>It is tempting to think the therapy should head straight for the worst of it. It usually should not. Going into the middle of a trauma can simply re-traumatise someone.</p>
+      <p>Instead the practitioner keeps moving between two places: the edge of what is difficult, and the edge of what is fine. Touch a little of the difficulty, come back to somewhere safe, touch again. A figure of eight, back and forth.</p>
+      <p>Each pass widens the safe side a little and narrows the difficult one. The person stays present throughout, which is the whole point.</p>
+    </div>
+      </section>
+      <section class="uo__sec" id="stillness" data-depth="5">
+        <p class="uo__eyebrow">06</p>
+        <h2 class="uo__h2">What actually happens in a session</h2>
+        
+        <div class="uo__prose">
+      <p>Stripped of the theory, three things:</p>
+      <ol class="uo__steps">
+        <li><span class="uo__n">01</span><div><strong>Listen.</strong> The practitioner settles and does nothing in particular &mdash; no agenda, no technique being applied. The body is allowed to show what it is doing.</div></li>
+        <li><span class="uo__n">02</span><div><strong>Wait for balance.</strong> The forces in the tissue are held evenly, neither winning. There is a moment where the system stops fighting itself. It is quiet and easy to miss.</div></li>
+        <li><span class="uo__n">03</span><div><strong>Then leave it alone.</strong> Once that balance is reached, the body does the reorganising. The practitioner&rsquo;s job is not to interrupt it.</div></li>
+      </ol>
+      <p>You may feel warmth, or a slow unwinding, or nothing much at all. The last is common and is not a failure. The body is not a machine whose buttons can be pressed. It is a living system being given an hour of not being interfered with.</p>
+    </div>
+      </section>
+
+      <footer class="uo__end">
+        <p class="uo__endLine">That is the whole of the theory.</p>
+        <p class="uo__endText">The practice is mostly learning to be quiet enough to notice.</p>
+        <p class="uo__endLinks">
+          <a href="the-work.html">The work, in more detail</a>
+          <a href="sessions.html">What a session is like</a>
+        </p>
+      </footer>
+    </article>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__line">
+      <span class="foot__id">Long&nbsp;Tide</span>
+      <span class="foot__status"><span class="foot__dot"></span>Craniosacral therapy &middot; <span data-site="city">Mumbai</span> &middot; Est. <span data-site="founded">2019</span></span>
+      <span class="foot__status" data-clock>&mdash;</span>
+    </div>
+    <p class="foot__legal">
+      Craniosacral therapy is a complementary modality. It is not a substitute for medical diagnosis, treatment or emergency care. Information on this site is general and is not medical advice. Consult a qualified healthcare professional about your own circumstances.
+    </p>
+    <nav class="foot__nav" aria-label="Legal and accessibility">
+      <a href="privacy.html">Privacy</a>
+      <a href="disclaimer.html">Medical disclaimer</a>
+      <a href="terms.html">Terms</a>
+      <a href="accessibility.html">Accessibility</a>
+    </nav>
+
+    <div class="foot__colophon">
+      <p class="foot__made">
+        Made with
+        <svg class="foot__heart" viewBox="0 0 24 24" role="img" aria-label="love" focusable="false"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        by <span data-site="designer">Norman James</span> @ <span data-site="studio">Empathy Studio</span>
+      </p>
+      <p class="foot__copy">&copy; <span data-year>2026</span> <span data-site="practitioner">Poonam Mahendra</span>. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+<script src="assets/vendor/three.min.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/split-text.js"></script>
+<script src="assets/js/cursor.js"></script>
+<script src="assets/js/preloader.js"></script>
+<script src="assets/js/lenis-init.js"></script>
+<script src="assets/js/animations.js"></script>
+<script src="assets/js/transitions.js"></script>
+<script src="assets/js/atmos.js"></script>
+<script src="assets/js/form.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/page.js"></script>
+</body>
+</html>

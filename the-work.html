@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Work — Long Tide, Craniosacral Therapy in Mumbai</title>
+<meta name="description" content="What craniosacral therapy is, where it came from, and what the practitioner is doing. Sutherland, the three tides, and an honest note on evidence.">
+<meta name="theme-color" content="#080706">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080706'/%3E%3Cg fill='none' stroke='%23EDE9E0' stroke-width='1'%3E%3Ccircle cx='16' cy='16' r='2' fill='%23B24B2C' stroke='none'/%3E%3Cpath d='M11.2 16a4.8 4.8 0 0 1 4.8-4.8M20.8 16a4.8 4.8 0 0 1-4.8 4.8'/%3E%3Cpath d='M6.6 16a9.4 9.4 0 0 1 9.4-9.4M25.4 16a9.4 9.4 0 0 1-9.4 9.4'/%3E%3C/g%3E%3C/svg%3E">
+<script>
+(function () {
+  var d = document.documentElement;
+  d.classList.add('first-frame');
+  try {
+    var arrived = sessionStorage.getItem('sp:nav') === '1';
+    /* the panel is claimed here, synchronously, so it is covering at first
+       paint — not after a script has had time to run */
+    if (!arrived) d.classList.add('is-loading');
+    if (arrived) {
+      sessionStorage.removeItem('sp:nav');
+      window.SP_ARRIVED = true;
+      d.classList.add('nav-in');
+      /* if any module fails to run, the page must never stay covered */
+      setTimeout(function () { d.classList.remove('nav-in'); }, 3000);
+    }
+  } catch (e) {}
+})();
+</script>
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/core.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+<div class="preloader" aria-hidden="true">
+  <span class="preloader__word">still</span>
+  <span class="preloader__rule" aria-hidden="true"></span>
+  <span class="preloader__count">000</span>
+</div>
+<div class="curtain" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="atmos" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<canvas id="atmos-canvas" aria-hidden="true"></canvas>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<aside class="rail" aria-label="Site">
+  <a class="rail__mark" href="index.html"><span>Long Tide</span></a>
+  <button class="rail__toggle" data-open-index aria-expanded="false">Index</button>
+  <span class="rail__index">02 — 06</span>
+</aside>
+
+<div class="index" id="index" role="dialog" aria-modal="true" aria-label="Index">
+  <div class="index__top">
+    <span class="mono mono--wide" style="color:var(--text-60)">Long Tide — Index</span>
+    <button class="index__close">Close</button>
+  </div>
+  <nav class="index__body" aria-label="Primary">
+    <a class="index__link" href="index.html"><span class="n">01</span><span class="t">The Inscription</span><span class="m">Enter</span></a>
+    <a class="index__link" href="the-work.html"><span class="n">02</span><span class="t">The Work</span><span class="m">Doctrine</span></a>
+    <a class="index__link" href="sessions.html"><span class="n">03</span><span class="t">Sessions</span><span class="m">Practice</span></a>
+    <a class="index__link" href="about.html"><span class="n">04</span><span class="t">The Practitioner</span><span class="m">Lineage</span></a>
+    <a class="index__link" href="resources.html"><span class="n">05</span><span class="t">Resources</span><span class="m">Archive</span></a>
+    <a class="index__link" href="contact.html"><span class="n">06</span><span class="t">Contact</span><span class="m">Threshold</span></a>
+  </nav>
+  <nav class="index__legal" aria-label="Reference">
+    <a href="understanding.html">Understanding the work</a>
+    <a href="the-room.html">The room</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="disclaimer.html">Medical disclaimer</a>
+    <a href="terms.html">Terms</a>
+    <a href="accessibility.html">Accessibility</a>
+  </nav>
+  <div class="index__foot">
+    <span class="mono mono--sm" style="color:var(--text-20)"><span data-site="city">Mumbai</span></span>
+    <span class="mono mono--sm" style="color:var(--text-20)">Est. <span data-site="founded">2019</span></span>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ===== HERO TYPE 04 · THE MANUSCRIPT REVEAL ===== -->
+<section class="ms" data-sacred aria-label="The work">
+  <div class="ms__col">
+    <p class="ms__masthead">Long Tide &middot; Craniosacral Therapy</p>
+    <div class="ms__rule" id="ms-rule"></div>
+    <h1 class="ms__h" id="ms-h">
+      <span>Medicine that begins</span>
+      <span>by <em>noticing</em>.</span>
+    </h1>
+    <p class="ms__body" id="ms-dropcap">
+      Around the turn of the twentieth century, a final-year osteopathy student named William Garner Sutherland was examining a set of disarticulated human skull bones in his college laboratory. Fitting two of them together, he noticed the seams were bevelled and overlapping, and had the thought that they were shaped like the gills of a fish: formed for some kind of respiratory motion. His teachers found the idea eccentric. He spent the next several decades testing it.
+    </p>
+    <p class="mono mono--sm" style="margin-top:34px;color:var(--text-20)">Volume I &middot; Doctrine &middot; <span data-site="founded">2019</span></p>
+    <span class="ms__margin mono mono--sm" aria-hidden="true">Volume I &middot; Shastra</span>
+  </div>
+</section>
+
+<!-- ===== THE CONCEPT ===== -->
+<section class="band">
+  <div class="wrap">
+    <div class="two-up">
+      <div class="prose">
+        <h2 style="margin-top:0">What Sutherland observed</h2>
+        <p>Sutherland&rsquo;s central proposition was not that the skull bones move in themselves, but that the whole system expresses a slow, rhythmic breathing &mdash; an inhalation and an exhalation that continues whether or not you are attending to it.</p>
+        <p>He called the organising principle behind that motion the <strong>Breath of Life</strong>, a term borrowed to describe the intentions and actions of a creative intelligence at work in the body. Whatever your metaphysics, the clinical observation underneath it is humbler: the body has a rhythm you can feel with your hands, and it changes when the system is unwell.</p>
+        <blockquote>
+          He hit upon the idea that the sutures of the bones he was holding were like the gills of a fish and designed for some kind of respiratory motion.
+          <cite>Michael Kern &mdash; <em>Wisdom in the Body</em></cite>
+        </blockquote>
+        <h2>Three rhythms</h2>
+        <p>Practitioners describe three nested rhythms, each slower and more subtle than the last. They are not separate systems; they are described as enfolded in one another &mdash; rhythms within rhythms.</p>
+        <ul>
+          <li><strong>The cranial rhythmic impulse</strong> &mdash; the most superficial, felt at roughly eight to twelve cycles a minute.</li>
+          <li><strong>The mid-tide</strong> &mdash; slower, around two and a half cycles a minute, carrying the available potency.</li>
+          <li><strong>The long tide</strong> &mdash; the most formative, at roughly one hundred seconds per cycle.</li>
+        </ul>
+        <h2>Two lineages</h2>
+        <p><strong>Biomechanical</strong> work, most closely associated with John Upledger, tends to be more structural: assessing and gently encouraging movement, working with specific techniques toward a release.</p>
+        <p><strong>Biodynamic</strong> work, associated with Franklyn Sills, is more receptive. Rather than correcting a lesion, it orientates to health &mdash; settling into stillness and following the slower tides.</p>
+        <p>My own practice is primarily biodynamic, with biomechanical training to draw on where it helps.</p>
+        <div class="note">
+          <strong>A note on evidence.</strong> Craniosacral therapy is widely practised but remains lightly researched. Some small studies suggest benefit for pain, migraine and infant comfort; the evidence base is not strong. What is well established is the value of calm, safe, unhurried touch. I describe the work honestly and do not sell certainty.
+        </div>
+        <h2>What it is not</h2>
+        <ul>
+          <li>Not chiropractic, and not a manipulation &mdash; nothing is forced or cracked.</li>
+          <li>Not massage: no oils, no deep tissue work, and you stay fully clothed.</li>
+          <li>Not a cure, and not a diagnostic service.</li>
+          <li>Not a replacement for your doctor, your physiotherapist, or your medication.</li>
+        </ul>
+      </div>
+
+      <aside class="sticky-col">
+        <figure class="duo" style="aspect-ratio:4/5;margin:0">
+          <img src="assets/img/skull-anatomy.jpg" alt="Anatomical study of a human skull with diagrammatic arcs indicating cranial motion" loading="lazy">
+        </figure>
+        <p class="mono mono--sm" style="margin-top:14px;color:var(--text-20)">Study of cranial motion &middot; Plate I</p>
+
+        <div style="margin-top:36px;border-top:1px solid var(--line);padding-top:22px">
+          <p class="mono mono--sm" style="color:var(--accent);margin-bottom:16px">At a glance</p>
+          <dl class="dl-rows">
+            <div><dt>Duration</dt><dd>60 minutes</dd></div>
+            <div><dt>Clothing</dt><dd>Fully clothed</dd></div>
+            <div><dt>Position</dt><dd>On your back</dd></div>
+            <div><dt>Pressure</dt><dd>None</dd></div>
+          </dl>
+          <a class="u-link" style="margin-top:24px" href="sessions.html">Sessions in detail <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8"/></svg></a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CLOSE ===== -->
+<section class="band band--tight" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="two-up" style="align-items:center">
+      <h2 class="display h-2" data-split style="max-width:16ch">Read what actually happens in the <em>room</em>.</h2>
+      <div>
+        <p class="body-lg" style="max-width:34ch">Fees, duration, what to wear, and the questions people ask before their first appointment.</p>
+        <a class="action" style="margin-top:26px" href="sessions.html">
+          <span class="action__fill" aria-hidden="true"></span>
+          Sessions &amp; fees <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== GO DEEPER ===== -->
+<section class="band band--tight" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="two-up" style="align-items:center">
+      <p class="body-lg" style="max-width:40ch">That was the doctrine. If you would rather have the ideas without the vocabulary, there is a plain-language version.</p>
+      <a class="action" href="understanding.html" style="justify-self:start"><span class="action__fill" aria-hidden="true"></span>Understanding the work <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8"/></svg></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__line">
+      <span class="foot__id">Long&nbsp;Tide</span>
+      <span class="foot__status"><span class="foot__dot"></span>Craniosacral therapy &middot; <span data-site="city">Mumbai</span> &middot; Est. <span data-site="founded">2019</span></span>
+      <span class="foot__status" data-clock>&mdash;</span>
+    </div>
+    <p class="foot__legal">
+      Craniosacral therapy is a complementary modality. It is not a substitute for medical diagnosis, treatment or emergency care. Information on this site is general and is not medical advice. Consult a qualified healthcare professional about your own circumstances.
+    </p>
+    <nav class="foot__nav" aria-label="Legal and accessibility">
+      <a href="privacy.html">Privacy</a>
+      <a href="disclaimer.html">Medical disclaimer</a>
+      <a href="terms.html">Terms</a>
+      <a href="accessibility.html">Accessibility</a>
+    </nav>
+
+    <div class="foot__colophon">
+      <p class="foot__made">
+        Made with
+        <svg class="foot__heart" viewBox="0 0 24 24" role="img" aria-label="love" focusable="false"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        by <span data-site="designer">Norman James</span> @ <span data-site="studio">Empathy Studio</span>
+      </p>
+      <p class="foot__copy">&copy; <span data-year>2026</span> <span data-site="practitioner">Poonam Mahendra</span>. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+<script src="assets/vendor/three.min.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/split-text.js"></script>
+<script src="assets/js/cursor.js"></script>
+<script src="assets/js/preloader.js"></script>
+<script src="assets/js/lenis-init.js"></script>
+<script src="assets/js/animations.js"></script>
+<script src="assets/js/transitions.js"></script>
+<script src="assets/js/atmos.js"></script>
+<script src="assets/js/form.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/page.js"></script>
+</body>
+</html>

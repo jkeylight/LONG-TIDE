@@ -1,0 +1,230 @@
+/* ==========================================================================
+   HOME — Hero Type 01 · The Inscription + section architecture
+   ========================================================================== */
+
+/* ---------- 01 · THE INSCRIPTION --------------------------------------- */
+.inscription{
+  position:relative;
+  min-height:100vh;min-height:100svh;
+  display:grid;grid-template-rows:auto 1fr auto;
+  padding:clamp(24px,4vw,44px) calc(var(--rail) + clamp(16px,3vw,40px)) clamp(26px,4vw,44px) var(--pad);
+  overflow:hidden;
+}
+.inscription__field{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(42% 34% at 50% 46%, rgba(237,233,224,.07), transparent 72%),
+    radial-gradient(60% 50% at 50% 110%, rgba(178,75,44,.05), transparent 70%);
+  opacity:0;
+}
+.is-ready .inscription__field{opacity:1;transition:opacity 3s ease}
+
+.inscription__masthead{
+  position:relative;z-index:2;
+  display:flex;justify-content:space-between;align-items:baseline;gap:20px;
+  color:var(--text-40);
+}
+.inscription__masthead .mono{color:var(--text-40)}
+@media (max-width:560px){
+  /* keep the masthead on one line — two-line wrap reads as a mistake */
+  .inscription__masthead .mono{font-size:9px;letter-spacing:.13em}
+}
+
+.inscription__center{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:clamp(26px,4vh,48px);
+  text-align:center;
+}
+.inscription__word{
+  font-size:clamp(76px,20vw,290px);
+  line-height:.86;
+  letter-spacing:.2em;      /* the inscription's carving */
+  text-indent:0;
+  padding-left:.2em;        /* balances the trailing letter-space; keeps it optically centred */
+  margin:0;
+  color:var(--text);
+  will-change:letter-spacing;
+}
+.inscription__sub{
+  color:var(--text-40);
+  max-width:34ch;
+  font-size:10px;
+  letter-spacing:.28em;
+  line-height:2;
+}
+
+.inscription__margin{
+  position:absolute;z-index:2;right:calc(var(--rail) + clamp(20px,3vw,40px));top:50%;
+  transform:translateY(-50%) rotate(180deg);
+  writing-mode:vertical-rl;
+  color:var(--text-20);
+  pointer-events:none;
+}
+.inscription__margin .mono{color:var(--text-20)}
+
+.inscription__scroll{
+  position:relative;z-index:2;justify-self:center;
+  display:block;width:1px;height:60px;
+  background:var(--text-20);overflow:hidden;
+}
+.inscription__scroll span{
+  position:absolute;inset:0;background:var(--text-60);
+  transform:translateY(-100%);
+  animation:scrollHint 3.4s cubic-bezier(.6,0,.2,1) infinite;
+}
+@keyframes scrollHint{
+  0%{transform:translateY(-100%)}
+  45%{transform:translateY(0)}
+  100%{transform:translateY(100%)}
+}
+
+/* ---------- 02 · THE PREMISE ------------------------------------------- */
+.premise__statement{
+  font-size:clamp(23px,3.4vw,52px);
+  line-height:1.18;letter-spacing:-.015em;
+  max-width:17ch;
+  color:var(--text);
+}
+.premise__statement .word{margin-right:.24em}
+.premise__after{
+  display:grid;grid-template-columns:minmax(0,1fr);
+  gap:clamp(20px,3vw,30px);align-items:start;
+  margin-top:clamp(34px,5vw,60px);
+}
+
+/* ---------- 03 · THE RHYTHMS ------------------------------------------- */
+.rhythms__head{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;
+  gap:clamp(20px,4vw,60px);align-items:end;
+  margin-bottom:clamp(34px,5vw,60px);
+}
+.rhythms__rows{border-top:1px solid var(--line)}
+.rhythm{
+  display:grid;grid-template-columns:clamp(140px,16vw,220px) minmax(0,1fr) 34px;
+  gap:clamp(16px,2.6vw,42px);align-items:start;
+  padding-block:clamp(26px,3.6vw,44px);
+  border-bottom:1px solid var(--line-soft);
+  transition:border-bottom-color .4s;
+}
+.rhythm:hover{border-bottom-color:var(--accent)}
+.rhythm__rate{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.rhythm__rate .numeral{color:var(--text)}
+.rhythm__rate .mono{color:var(--text-40);max-width:15ch}
+.rhythm__body{display:grid;gap:10px;max-width:52ch}
+.rhythm__desc{font-size:clamp(14.5px,1.1vw,16.5px);line-height:1.75;color:var(--text-60)}
+.rhythm__i{color:var(--text-20);justify-self:end}
+
+.rhythms__src{
+  margin-top:26px;color:var(--text-20);max-width:56ch;line-height:1.8;
+  font-family:var(--body);text-transform:none;letter-spacing:.01em;
+  font-size:12.5px;
+}
+
+/* ---------- 04 · IN THE ROOM ------------------------------------------- */
+.room__grid{
+  display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);
+  gap:clamp(30px,5vw,80px);align-items:start;
+}
+.room__figure{position:relative;aspect-ratio:4/5;margin:0}
+.room__figure img{height:112%;object-position:center 40%}
+.room__cap{
+  position:absolute;left:0;bottom:-26px;color:var(--text-20);
+  text-transform:none;letter-spacing:.14em;
+}
+
+.arc{margin-top:clamp(30px,4vw,44px);border-top:1px solid var(--line)}
+.arc li{
+  display:grid;grid-template-columns:34px minmax(0,150px) minmax(0,1fr);
+  gap:clamp(12px,2.4vw,28px);align-items:baseline;
+  padding-block:18px;border-bottom:1px solid var(--line-soft);
+}
+.arc__n{color:var(--text-20)}
+.arc__t{font-family:var(--display);font-weight:200;font-size:clamp(16px,1.5vw,20px);letter-spacing:-.008em;color:var(--text)}
+.arc__d{font-size:14px;line-height:1.7;color:var(--text-40)}
+
+/* ---------- 05 · WHO COMES --------------------------------------------- */
+.who__list{display:grid}
+.who__list li{
+  display:grid;grid-template-columns:38px minmax(0,1fr);
+  gap:16px;align-items:baseline;
+  padding-block:14px;border-bottom:1px solid var(--line-soft);
+  font-size:clamp(15px,1.25vw,18px);line-height:1.5;color:var(--text-80);
+  transition:color .3s,border-color .3s;
+}
+.who__list li:first-child{border-top:1px solid var(--line)}
+.who__list li:hover{color:var(--text);border-bottom-color:var(--accent)}
+.who__n{color:var(--text-20)}
+
+/* ---------- 06 · PRACTITIONER ------------------------------------------ */
+.practitioner__grid{
+  display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);
+  gap:clamp(32px,6vw,90px);align-items:center;
+}
+.practitioner__quote{
+  font-size:clamp(21px,2.9vw,42px);
+  line-height:1.24;letter-spacing:-.015em;
+  max-width:23ch;margin-top:20px;
+}
+.practitioner__figure{position:relative;margin:0;aspect-ratio:4/5}
+.practitioner__figure img{height:100%}
+.practitioner__cap{
+  position:absolute;left:0;bottom:-28px;color:var(--text-20);
+  text-transform:none;letter-spacing:.16em;
+}
+
+/* ---------- 07 · ARCHIVE ----------------------------------------------- */
+.archive__head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;margin-bottom:22px}
+.archive__grid{display:grid;gap:0}
+.archive__item{
+  display:grid;grid-template-columns:44px minmax(0,1fr) auto;
+  gap:clamp(16px,3vw,40px);align-items:baseline;
+  padding-block:clamp(14px,2vw,22px);
+  border-bottom:1px solid var(--line-soft);
+  transition:border-color .35s,padding-left .45s var(--ease-out);
+}
+.archive__item:first-child{border-top:1px solid var(--line-soft)}
+.archive__item:hover{border-bottom-color:var(--accent);padding-left:12px}
+.archive__i{color:var(--text-20)}
+.archive__t{
+  font-size:clamp(19px,2.5vw,34px);line-height:1.1;letter-spacing:-.015em;
+  color:var(--text-80);transition:color .35s;
+}
+.archive__item:hover .archive__t{color:var(--text)}
+.archive__a{color:var(--text-20);text-transform:none;letter-spacing:.14em;text-align:right}
+
+/* ---------- 08 · THRESHOLD --------------------------------------------- */
+.threshold__h{margin-top:clamp(20px,3vw,34px);font-size:clamp(34px,6.4vw,104px);line-height:.98}
+.threshold__h em{color:var(--text-40)}
+.threshold__foot{
+  display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
+  gap:clamp(24px,4vw,60px);
+  margin-top:clamp(36px,5vw,70px);
+  padding-top:clamp(24px,3vw,40px);
+  border-top:1px solid var(--line);
+}
+
+/* ---------- responsive ------------------------------------------------- */
+@media (max-width:1024px){
+  .room__grid,.practitioner__grid{grid-template-columns:minmax(0,1fr)}
+  .room__figure{aspect-ratio:4/3;order:2}
+  .rhythms__head{grid-template-columns:minmax(0,1fr)}
+  .premise__after{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:760px){
+  .inscription{
+    padding-left:var(--pad);padding-right:calc(var(--rail) + 8px);
+  }
+  .inscription__word{font-size:clamp(64px,22vw,120px);letter-spacing:.14em;padding-left:.14em}
+  .inscription__margin{display:none}
+  .rhythm{grid-template-columns:minmax(0,1fr) 30px;row-gap:16px}
+  .rhythm__rate{grid-column:1}
+  .rhythm__body{grid-column:1}
+  .rhythm__i{grid-row:1;grid-column:2}
+  .arc li{grid-template-columns:28px minmax(0,1fr);row-gap:6px}
+  .arc__d{grid-column:2}
+  .archive__item{grid-template-columns:30px minmax(0,1fr);row-gap:6px}
+  .archive__a{grid-column:2;text-align:left}
+  .practitioner__cap,.room__cap{position:static;margin-top:14px}
+  .room__figure img{height:100%}
+}

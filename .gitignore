@@ -1,0 +1,6 @@
+# nothing generated lives in this repo, but keep the usual noise out
+.DS_Store
+Thumbs.db
+*.log
+shots/
+# the generator lives in build-tmp/ outside this repo; the HTML is the source

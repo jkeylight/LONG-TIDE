@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Resources — Long Tide, Craniosacral Therapy in Mumbai</title>
+<meta name="description" content="A plain glossary of craniosacral terms — still point, mid-tide, long tide, potency — and the reading list I would give a curious client.">
+<meta name="theme-color" content="#080706">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080706'/%3E%3Cg fill='none' stroke='%23EDE9E0' stroke-width='1'%3E%3Ccircle cx='16' cy='16' r='2' fill='%23B24B2C' stroke='none'/%3E%3Cpath d='M11.2 16a4.8 4.8 0 0 1 4.8-4.8M20.8 16a4.8 4.8 0 0 1-4.8 4.8'/%3E%3Cpath d='M6.6 16a9.4 9.4 0 0 1 9.4-9.4M25.4 16a9.4 9.4 0 0 1-9.4 9.4'/%3E%3C/g%3E%3C/svg%3E">
+<script>
+(function () {
+  var d = document.documentElement;
+  d.classList.add('first-frame');
+  try {
+    var arrived = sessionStorage.getItem('sp:nav') === '1';
+    /* the panel is claimed here, synchronously, so it is covering at first
+       paint — not after a script has had time to run */
+    if (!arrived) d.classList.add('is-loading');
+    if (arrived) {
+      sessionStorage.removeItem('sp:nav');
+      window.SP_ARRIVED = true;
+      d.classList.add('nav-in');
+      /* if any module fails to run, the page must never stay covered */
+      setTimeout(function () { d.classList.remove('nav-in'); }, 3000);
+    }
+  } catch (e) {}
+})();
+</script>
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/core.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+<div class="preloader" aria-hidden="true">
+  <span class="preloader__word">still</span>
+  <span class="preloader__rule" aria-hidden="true"></span>
+  <span class="preloader__count">000</span>
+</div>
+<div class="curtain" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="atmos" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<canvas id="atmos-canvas" aria-hidden="true"></canvas>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<aside class="rail" aria-label="Site">
+  <a class="rail__mark" href="index.html"><span>Long Tide</span></a>
+  <button class="rail__toggle" data-open-index aria-expanded="false">Index</button>
+  <span class="rail__index">05 — 06</span>
+</aside>
+
+<div class="index" id="index" role="dialog" aria-modal="true" aria-label="Index">
+  <div class="index__top">
+    <span class="mono mono--wide" style="color:var(--text-60)">Long Tide — Index</span>
+    <button class="index__close">Close</button>
+  </div>
+  <nav class="index__body" aria-label="Primary">
+    <a class="index__link" href="index.html"><span class="n">01</span><span class="t">The Inscription</span><span class="m">Enter</span></a>
+    <a class="index__link" href="the-work.html"><span class="n">02</span><span class="t">The Work</span><span class="m">Doctrine</span></a>
+    <a class="index__link" href="sessions.html"><span class="n">03</span><span class="t">Sessions</span><span class="m">Practice</span></a>
+    <a class="index__link" href="about.html"><span class="n">04</span><span class="t">The Practitioner</span><span class="m">Lineage</span></a>
+    <a class="index__link" href="resources.html"><span class="n">05</span><span class="t">Resources</span><span class="m">Archive</span></a>
+    <a class="index__link" href="contact.html"><span class="n">06</span><span class="t">Contact</span><span class="m">Threshold</span></a>
+  </nav>
+  <nav class="index__legal" aria-label="Reference">
+    <a href="understanding.html">Understanding the work</a>
+    <a href="the-room.html">The room</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="disclaimer.html">Medical disclaimer</a>
+    <a href="terms.html">Terms</a>
+    <a href="accessibility.html">Accessibility</a>
+  </nav>
+  <div class="index__foot">
+    <span class="mono mono--sm" style="color:var(--text-20)"><span data-site="city">Mumbai</span></span>
+    <span class="mono mono--sm" style="color:var(--text-20)">Est. <span data-site="founded">2019</span></span>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ===== HERO TYPE 12 · THE LINEAGE DOCUMENT ===== -->
+<section class="ld" data-sacred aria-label="Resources">
+  <div class="ld__head">
+    <div>
+      <p class="mono mono--wide" style="color:var(--text-40);margin-bottom:22px">Long Tide &middot; Archive</p>
+      <h1 class="display ld__h">The words this<br>work <em>uses</em>.</h1>
+    </div>
+    <p class="mono mono--sm" style="color:var(--text-20);text-align:right">Glossary &middot; Reading<br>Ten terms &middot; Seven volumes</p>
+  </div>
+
+  <div class="ld__cols">
+    <div class="ld__col">
+      <span class="mono mono--sm">Provenance</span>
+      <span class="t">Terms are close paraphrases as used in the source texts, not invented for this page.</span>
+    </div>
+    <div class="ld__col">
+      <span class="mono mono--sm">Sources</span>
+      <span class="t">Kern &middot; Menzam-Sills &middot; Sills &middot; Upledger &middot; Kalinowska &amp; Hatton &middot; Shea &middot; Cohen</span>
+    </div>
+    <div class="ld__col">
+      <span class="mono mono--sm">Register</span>
+      <span class="t">Read slowly. None of this is required before your first session.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GLOSSARY ===== -->
+<section class="band">
+  <div class="wrap">
+    <div class="two-up">
+      <div>
+        <p class="mono" style="color:var(--accent)">i &mdash; Glossary</p>
+        <h2 class="display h-2" data-split style="margin-top:18px;max-width:12ch">Ten terms worth <em>knowing</em>.</h2>
+      </div>
+      <div>
+        <dl class="defs">
+          <div><dt>Breath of Life</dt><dd>Sutherland&rsquo;s term for the organising principle behind the body&rsquo;s involuntary motion. Used less as anatomy than as the source from which the rhythms arise.</dd></div>
+          <div><dt>Primary respiration</dt><dd>The body&rsquo;s involuntary breathing motility, distinct from lung breathing. It continues regardless of attention.</dd></div>
+          <div><dt>Cranial rhythmic impulse</dt><dd>The most superficial of the three tides, felt at roughly eight to twelve cycles per minute.</dd></div>
+          <div><dt>The mid-tide</dt><dd>A slower rhythm of about two and a half cycles per minute, described as carrying the available potency that organises the body.</dd></div>
+          <div><dt>The long tide</dt><dd>The most formative rhythm, at roughly one hundred seconds per cycle. Described as boundless: it does not appear to stop at the skin.</dd></div>
+          <div><dt>Still point</dt><dd>A pause in the rhythm. Not an absence of motion but the fulcrum around which motion organises.</dd></div>
+          <div><dt>Dynamic stillness</dt><dd>The ground from which the tides arise &mdash; reached by quietening enough to notice it.</dd></div>
+          <div><dt>Holistic shift</dt><dd>The moment the physiology settles as a whole rather than in parts, expressing wholeness rather than fragmentation.</dd></div>
+          <div><dt>Reciprocal tension</dt><dd>The balanced, continuous tension of the membranes inside the head, which lets motion distribute through the whole system.</dd></div>
+          <div><dt>Potency</dt><dd>The available vitality carried in the fluids &mdash; not a force the practitioner adds, but one they make room for.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== UNDERSTANDING ===== -->
+<section class="band" id="understanding" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="two-up" style="align-items:center;gap:clamp(30px,5vw,80px)">
+      <div>
+        <p class="mono" style="color:var(--accent)">i &mdash; Plain language</p>
+        <h2 class="display h-2" style="margin-top:18px;max-width:20ch">If the books are too much, start <em>here</em>.</h2>
+        <p class="body-lg" style="margin-top:22px;max-width:44ch">Six short sections explaining what practitioners actually mean by a fulcrum, a tide and a still point. No training required, about three minutes.</p>
+        <p class="mono mono--sm" style="margin-top:26px;color:var(--text-60);text-transform:none;letter-spacing:.08em">A model of how the body works &mdash; not a claim about mechanism.</p>
+      </div>
+      <div style="display:grid;justify-items:start;gap:18px">
+        <a class="action" href="understanding.html"><span class="action__fill" aria-hidden="true"></span>Start reading <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE ROOM ===== -->
+<section class="band" id="the-room" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="two-up" style="align-items:center;gap:clamp(30px,5vw,80px)">
+      <div>
+        <p class="mono" style="color:var(--accent)">ii &mdash; The place</p>
+        <h2 class="display h-2" style="margin-top:18px;max-width:20ch">The room, before you <em>come</em>.</h2>
+        <p class="body-lg" style="margin-top:22px;max-width:44ch">Eight photographs of the practice in Worli &mdash; the light, the linen, the chairs, the water. Almost nobody in them.</p>
+        <p class="mono mono--sm" style="margin-top:26px;color:var(--text-60);text-transform:none;letter-spacing:.08em">A record of the place, not a gallery of the work.</p>
+      </div>
+      <div style="display:grid;justify-items:start;gap:18px">
+        <a class="action" href="the-room.html"><span class="action__fill" aria-hidden="true"></span>Look inside <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== READING LIST · pinned horizontal shelf ===== -->
+<section class="band hx" id="reading" data-hscroll style="border-top:1px solid var(--line)" aria-label="Reading list">
+  <div class="wrap">
+    <div class="two-up hx__head" style="align-items:end">
+      <div>
+        <p class="mono" style="color:var(--accent)">ii &mdash; Volumes</p>
+        <h2 class="display h-2" data-split style="margin-top:18px;max-width:17ch" data-split>If you want to understand this properly, read <em>these</em>.</h2>
+      </div>
+      <p class="body-lg" style="max-width:32ch">In the order I would give them to a curious client. The first two are for anyone; the rest are practitioner texts.</p>
+    </div>
+  </div>
+
+  <div class="hx__viewport">
+    <div class="hx__track">
+        <article class="vol">
+          <span class="vol__n">01</span>
+          <h3>Wisdom in the Body</h3>
+          <p class="by">Michael Kern</p>
+          <p>The clearest single introduction to the cranial concept and to biodynamic practice. If you read one book, read this one.</p>
+          <span class="tag">Start here</span>
+        </article>
+        <article class="vol">
+          <span class="vol__n">02</span>
+          <h3>Every Body Tells a Story</h3>
+          <p class="by">Liz Kalinowska &amp; Da&scaron;ka Hatton</p>
+          <p>A craniosacral journey told through practitioners&rsquo; and patients&rsquo; accounts. The best answer to &ldquo;what does it feel like?&rdquo;</p>
+          <span class="tag">For clients</span>
+        </article>
+        <article class="vol">
+          <span class="vol__n">03</span>
+          <h3>The Breath of Life</h3>
+          <p class="by">Cherionna Menzam-Sills</p>
+          <p>An introduction to craniosacral biodynamics that stays close to the felt experience. Good on the tides.</p>
+          <span class="tag">Biodynamics</span>
+        </article>
+        <article class="vol">
+          <span class="vol__n">04</span>
+          <h3>Craniosacral Biodynamics, Vol. I</h3>
+          <p class="by">Franklyn Sills</p>
+          <p>The foundational practitioner text of the biodynamic approach. Dense, systematic, and the source of much of this vocabulary.</p>
+          <span class="tag">Practitioner</span>
+        </article>
+        <article class="vol">
+          <span class="vol__n">05</span>
+          <h3>Touchstone for Natural Healing</h3>
+          <p class="by">John E. Upledger</p>
+          <p>The other lineage &mdash; the biomechanical approach &mdash; from the person most responsible for bringing this work into the mainstream.</p>
+          <span class="tag">Biomechanical</span>
+        </article>
+        <article class="vol">
+          <span class="vol__n">06</span>
+          <h3>An Introduction to CranioSacral Therapy</h3>
+          <p class="by">Don Cohen</p>
+          <p>A short, plain-spoken primer. Useful if the practitioner texts feel like too much, too soon.</p>
+          <span class="tag">Primer</span>
+        </article>
+        <article class="vol">
+          <span class="vol__n">07</span>
+          <h3>Biodynamic Craniosacral Therapy, Vol. 5</h3>
+          <p class="by">Michael J. Shea</p>
+          <p>The most advanced and most clinical of the biodynamic volumes. For practitioners, or clients who want the deep end.</p>
+          <span class="tag">Advanced</span>
+        </article>
+      <article class="vol vol--end" aria-hidden="true">
+        <p class="mono mono--sm" style="text-transform:none;letter-spacing:.08em">
+          End of shelf.<br>Further reading in the glossary above.
+        </p>
+      </article>
+    </div>
+  </div>
+
+  <div class="wrap hx__note">
+    <p class="mono mono--sm">Titles listed for reference. Where to buy them is your business &mdash; a good bookshop or a library will usually oblige.</p>
+  </div>
+</section>
+
+<section class="band band--tight" data-sacred style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="two-up" style="align-items:center">
+      <h2 class="display h-2" data-split style="max-width:17ch">Nothing here is a <em>substitute</em> for being seen.</h2>
+      <div>
+        <p class="body-lg" style="max-width:42ch">Reading about this work is a poor second to an hour on a table, and no website can tell you whether it will help you. If you are curious, the honest next step is a conversation.</p>
+        <a class="action" style="margin-top:26px" href="contact.html"><span class="action__fill" aria-hidden="true"></span>Get in touch <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__line">
+      <span class="foot__id">Long&nbsp;Tide</span>
+      <span class="foot__status"><span class="foot__dot"></span>Craniosacral therapy &middot; <span data-site="city">Mumbai</span> &middot; Est. <span data-site="founded">2019</span></span>
+      <span class="foot__status" data-clock>&mdash;</span>
+    </div>
+    <p class="foot__legal">
+      Craniosacral therapy is a complementary modality. It is not a substitute for medical diagnosis, treatment or emergency care. Information on this site is general and is not medical advice. Consult a qualified healthcare professional about your own circumstances.
+    </p>
+    <nav class="foot__nav" aria-label="Legal and accessibility">
+      <a href="privacy.html">Privacy</a>
+      <a href="disclaimer.html">Medical disclaimer</a>
+      <a href="terms.html">Terms</a>
+      <a href="accessibility.html">Accessibility</a>
+    </nav>
+
+    <div class="foot__colophon">
+      <p class="foot__made">
+        Made with
+        <svg class="foot__heart" viewBox="0 0 24 24" role="img" aria-label="love" focusable="false"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        by <span data-site="designer">Norman James</span> @ <span data-site="studio">Empathy Studio</span>
+      </p>
+      <p class="foot__copy">&copy; <span data-year>2026</span> <span data-site="practitioner">Poonam Mahendra</span>. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+<script src="assets/vendor/three.min.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/split-text.js"></script>
+<script src="assets/js/cursor.js"></script>
+<script src="assets/js/preloader.js"></script>
+<script src="assets/js/lenis-init.js"></script>
+<script src="assets/js/animations.js"></script>
+<script src="assets/js/transitions.js"></script>
+<script src="assets/js/atmos.js"></script>
+<script src="assets/js/form.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/page.js"></script>
+</body>
+</html>

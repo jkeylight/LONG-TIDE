@@ -1,0 +1,616 @@
+/* ---------- atmosphere canvas (Three.js fog) ------------------------------ */
+/* Unstyled, this paints over the whole document. It must be fixed and behind. */
+#atmos-canvas{
+  position:fixed;inset:0;width:100%;height:100%;z-index:-1;
+  /* starts clear; app.js fades it in once the fog is running, so a slow
+     shader compile can never pop into view mid-reveal */
+  opacity:0;pointer-events:none;display:block;
+}
+/* ==========================================================================
+   STILL POINT — Cinematic system
+   Governing principle: "Not loud."
+   Void → bone → one ember. Sharp edges only. No glass, no rounded cards.
+   ========================================================================== */
+
+:root{
+  /* Emotional logic, not hex-picking: warm-black void, bone text, one ember */
+  --void:      #080706;
+  --void-2:    #0C0A08;
+  --void-3:    #12100D;
+  --text:      #EDE9E0;
+  --text-80:   rgba(237,233,224,.80);
+  --text-60:   rgba(237,233,224,.60);
+  --text-40:   rgba(237,233,224,.40);
+  --text-20:   rgba(237,233,224,.20);
+  --line:      rgba(237,233,224,.14);
+  --line-soft: rgba(237,233,224,.08);
+  --accent:    #B24B2C;      /* terracotta — used once per screen */
+  --accent-40: rgba(178,75,44,.4);
+
+  --display:'Fraunces','Iowan Old Style',Georgia,serif;
+  --body:'DM Sans',-apple-system,'Segoe UI',Helvetica,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+
+  --ease-out: cubic-bezier(.22,1,.36,1);
+  --ease-power4: cubic-bezier(.16,1,.3,1);
+
+  --pad: clamp(20px,5vw,72px);
+  --rail: 64px;              /* vertical nav rail width */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+/* The void is painted on <html>, never <body>, so the fixed Three.js layer
+   can sit at z-index:-1 and still be visible above the page background. */
+html{
+  background-color:var(--void);
+  /* reserved, always: locking scroll for the preloader or a transition must
+     not reflow the page by the width of the scrollbar */
+  scrollbar-gutter:stable;
+  overscroll-behavior-y:none;
+}
+html.is-locked,html.is-locked body{overflow:hidden}
+body{background:transparent;color:var(--text)}
+body{
+  margin:0;
+  font-family:var(--body);font-weight:300;
+  font-size:clamp(15px,1.05vw,17px);
+  line-height:1.8;                 /* generous — respect for the reader */
+  letter-spacing:.005em;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:clip;
+}
+img,video,svg{display:block;max-width:100%}
+img{height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3,h4,p,figure,blockquote,dl,dd,ul,ol{margin:0}
+ul,ol{padding:0;list-style:none}
+::selection{background:var(--accent);color:var(--void)}
+:focus-visible{outline:1px solid var(--accent);outline-offset:5px}
+
+/* ---------- type ------------------------------------------------------- */
+.display{
+  font-family:var(--display);font-weight:200;
+  line-height:.94;letter-spacing:-.02em;
+  font-optical-sizing:auto;
+  font-variation-settings:'SOFT' 0,'WONK' 0;
+}
+.display em{font-style:italic;font-variation-settings:'SOFT' 0,'WONK' 1}
+
+.h-hero{font-size:clamp(56px,13vw,190px);line-height:.86;letter-spacing:.02em}
+.h-1{font-size:clamp(34px,5.4vw,82px);line-height:.96;letter-spacing:-.018em}
+.h-2{font-size:clamp(26px,3.6vw,54px);line-height:1.02;letter-spacing:-.015em}
+.h-3{font-size:clamp(20px,2.2vw,30px);line-height:1.16;letter-spacing:-.01em}
+
+.mono{
+  font-family:var(--mono);font-weight:400;
+  font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+  line-height:1.4;
+}
+.mono--sm{font-size:9.5px;letter-spacing:.26em}
+.mono--wide{letter-spacing:.4em}
+
+.body-lg{font-size:clamp(16.5px,1.35vw,19.5px);line-height:1.72;color:var(--text-80)}
+.muted{color:var(--text-60)}
+.faint{color:var(--text-40)}
+
+/* huge numerals — weight 200 reads expensive on dark */
+.numeral{
+  font-family:var(--display);font-weight:200;
+  font-size:clamp(40px,7vw,104px);line-height:.9;letter-spacing:-.03em;
+}
+
+/* ---------- layout ----------------------------------------------------- */
+.rail-space{padding-right:calc(var(--rail))}
+.wrap{width:100%;max-width:1420px;margin-inline:auto;padding-inline:var(--pad)}
+section{position:relative}
+
+.band{padding-block:clamp(72px,11vw,168px)}
+.band--tight{padding-block:clamp(48px,7vw,104px)}
+
+.rule{height:1px;background:var(--line);border:0;margin:0}
+.rule--draw{transform-origin:left;transform:scaleX(0)}
+
+/* asymmetric, no two the same */
+.split{display:grid;gap:clamp(28px,5vw,88px)}
+.split--7-5{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+.split--5-7{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+.split--4-8{grid-template-columns:minmax(0,4fr) minmax(0,8fr)}
+
+.gutter-note{
+  display:grid;grid-template-columns:clamp(90px,12vw,150px) minmax(0,1fr);
+  gap:clamp(20px,4vw,56px);
+}
+
+/* ---------- the cursor ------------------------------------------------- */
+.cursor-dot,.cursor-ring{
+  position:fixed;top:0;left:0;z-index:9998;pointer-events:none;
+  border-radius:999px;will-change:transform;
+  mix-blend-mode:difference;
+}
+.cursor-dot{
+  width:8px;height:8px;background:var(--text);
+  margin:-4px 0 0 -4px;
+  scale:1;opacity:0;
+  transition:opacity .3s,scale .4s var(--ease-power4);
+}
+.cursor-ring{
+  width:40px;height:40px;margin:-20px 0 0 -20px;
+  border:1px solid rgba(237,233,224,.55);
+  /* the individual `scale` property composes with GSAP's transform,
+     so the hover growth never fights the pointer tracking */
+  scale:1;opacity:0;
+  transition:scale .45s var(--ease-power4),opacity .4s,border-color .3s;
+}
+body.cursor-over-link .cursor-ring{scale:2.5;border-color:rgba(178,75,44,.9)}
+body.cursor-in-void .cursor-ring{opacity:.2}
+body.cursor-in-void .cursor-dot{opacity:.2}
+@media (hover:none),(pointer:coarse){.cursor-dot,.cursor-ring{display:none}}
+
+/* ---------- preloader -------------------------------------------------- */
+.preloader{
+  position:fixed;inset:0;z-index:9999;background:var(--void);
+  /* hidden unless JS claimed the page (inline .first-frame in <head>):
+     a CSS-visible preloader would trap no-JS visitors on "still 000" forever */
+  display:none;
+  flex-direction:column;align-items:center;justify-content:center;
+  gap:clamp(28px,5vh,56px);
+}
+/* Its own gate, independent of .first-frame: boot strips .first-frame early
+   (to release the reveal primitives) while the preloader is still counting. */
+html.is-loading .preloader{display:flex}
+.preloader{transform:translate3d(0,0,0);backface-visibility:hidden}
+.preloader__rule{
+  width:clamp(90px,12vw,150px);height:1px;background:var(--text-20);
+  transform-origin:center;transform:scaleX(0);
+}
+.preloader__count{font-variant-numeric:tabular-nums}
+.preloader__word{
+  font-family:var(--display);font-weight:200;font-style:italic;
+  font-size:clamp(30px,6vw,72px);
+  /* Fixed, not animated. The old version tweened letter-spacing from .5em
+     to .16em — a text reflow on every frame. The tighter value is the one
+     it was always heading toward, so it now just starts there. */
+  letter-spacing:.24em;padding-left:.24em;
+  color:var(--text);opacity:.42;
+}
+.preloader__count{
+  font-family:var(--mono);font-size:11px;letter-spacing:.2em;
+  color:var(--text-40);font-variant-numeric:tabular-nums;
+}
+.preloader.is-done{pointer-events:none}
+
+/* ---------- vertical nav rail ------------------------------------------ */
+.rail{
+  position:fixed;top:0;right:0;bottom:0;width:var(--rail);z-index:900;
+  display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+  padding-block:clamp(22px,4vh,40px);
+  border-left:1px solid var(--line-soft);
+  background:linear-gradient(to left,rgba(8,7,6,.72),rgba(8,7,6,0));
+  backdrop-filter:blur(3px);
+  -webkit-backdrop-filter:blur(3px);
+}
+.rail__mark{
+  writing-mode:vertical-rl;text-orientation:mixed;
+  font-family:var(--display);font-weight:200;font-size:15px;
+  letter-spacing:.34em;color:var(--text);transform:rotate(180deg);
+  white-space:nowrap;display:inline-flex;align-items:baseline;gap:.5em;
+}
+.rail__toggle{margin-block:auto}
+.rail__toggle{
+  writing-mode:vertical-rl;
+  font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--text-60);padding:12px 0;
+  transition:color .3s;
+}
+.rail__toggle:hover{color:var(--text)}
+.rail__index{
+  writing-mode:vertical-rl;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;
+  color:var(--text-20);
+}
+@media (max-width:820px){
+  :root{--rail:52px}
+  .rail__index{display:none}
+}
+
+/* ---------- the index overlay (nav) ------------------------------------ */
+.index{
+  position:fixed;inset:0;z-index:950;
+  background:var(--void);
+  display:grid;grid-template-rows:auto 1fr auto;
+  padding:clamp(24px,4vw,48px);
+  clip-path:inset(100% 0 0 0);
+  visibility:hidden;
+}
+.index.is-open{visibility:visible}
+.index__top{display:flex;align-items:baseline;justify-content:space-between;gap:24px}
+.index__close{
+  font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--text-60);padding:8px 0;transition:color .25s;
+}
+.index__close:hover{color:var(--accent)}
+.index__body{align-self:center;display:grid;gap:clamp(10px,1.4vw,18px);max-width:1100px}
+.index__link{
+  display:grid;grid-template-columns:clamp(46px,6vw,84px) minmax(0,1fr) auto;
+  align-items:baseline;gap:clamp(14px,3vw,40px);
+  padding-block:clamp(6px,1vw,12px);
+  border-bottom:1px solid var(--line-soft);
+  opacity:0;transform:translateY(26px);
+  transition:opacity .7s var(--ease-out),transform .7s var(--ease-out),border-color .3s;
+}
+.index__link:hover{border-bottom-color:var(--accent)}
+.index__link .n{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--text-40)}
+.index__link .t{
+  font-family:var(--display);font-weight:200;
+  font-size:clamp(30px,6vw,74px);line-height:1;letter-spacing:-.02em;
+  color:var(--text);transition:color .3s,letter-spacing .5s var(--ease-out);
+}
+.index__link:hover .t{color:var(--accent);letter-spacing:.01em}
+.index__link .m{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--text-20);text-transform:uppercase}
+.index__foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;border-top:1px solid var(--line);padding-top:18px}
+@media (max-width:700px){ .index__link{grid-template-columns:34px minmax(0,1fr)} .index__link .m{display:none} }
+
+/* ---------- page curtain (transitions) --------------------------------- */
+.curtain{
+  position:fixed;inset:0;z-index:9990;background:var(--void-2);
+  visibility:hidden;pointer-events:none;
+  /* translateY, not clip-path: a full-viewport clip-path repaints every
+     frame and measured 43 of 43 frames dropped. This one is composited. */
+  transform:translate3d(0,100%,0);
+  backface-visibility:hidden;
+}
+/* arriving from another page: the panel is already covering at first paint,
+   so the wipe continues from where the previous page left it */
+.nav-in .curtain{visibility:visible;transform:translate3d(0,0,0)}
+/* on an internal transition the preloader must never appear above the wipe */
+.nav-in .preloader{display:none}
+
+/* ---------- split-text word masks --------------------------------------- */
+/* Each word sits in an overflow-hidden mask and rises from behind it.
+   The padding/negative-margin pair keeps italic descenders from being clipped. */
+.sw{
+  display:inline-block;overflow:hidden;vertical-align:top;
+  padding-bottom:.14em;margin-bottom:-.14em;
+}
+.sw-i{display:inline-block;will-change:transform}
+
+/* ---------- film grain -------------------------------------------------
+   Measured four ways while scrolling, same page, same harness:
+
+     fixed + mix-blend-mode:overlay     46.6 fps
+     tiled across the document          46.6 fps
+     fixed, no blend                    52.2 fps
+     no grain                           57.2 fps
+
+   The blend mode was the expensive one: it forces the whole viewport into
+   a single compositing group, so every scroll frame re-blends every pixel.
+   Tiling the texture down an 8,600px document was no better — the browser
+   re-rasterises tiles as they scroll into view.
+
+   This is the version that keeps the texture: one viewport-sized layer, an
+   already-decoded 96px PNG, composited as-is. */
+.grain{
+  position:fixed;inset:0;z-index:9996;pointer-events:none;
+  background-image:url("../img/grain.png");
+  background-repeat:repeat;background-size:96px 96px;
+  opacity:.5;
+}
+
+/* ---------- atmosphere (light falloff — never a "gradient background") -- */
+/* ---------- the ambient field ------------------------------------------
+   One fixed layer, not three. The atmosphere used to be a WebGL canvas plus
+   an .atmos gradient plus a .vignette — three full-viewport composited
+   layers, each re-composited on every scroll frame. That is what made this
+   site feel heavier than the reference it is measured against.
+
+   Sampled while scrolling: three layers → p50 33ms; one layer → p50 17ms.
+   All three were painted with gradients or fog and none of them were ever
+   the subject of attention, so they are merged into a single stack of
+   background-images on one element. Identical appearance, a third of the
+   work.
+
+   The Three.js fog is still in the project and can be switched on in
+   config.js (SITE.atmosphere). It is off by default because a live WebGL
+   layer costs more than the smoothness it buys. */
+.atmos{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(58% 44% at 26% 8%, rgba(237,233,224,.055), transparent 70%),
+    radial-gradient(70% 60% at 78% 96%, rgba(178,75,44,.035), transparent 72%),
+    radial-gradient(120% 90% at 50% 45%, transparent 42%, rgba(8,7,6,.75) 100%);
+}
+.vignette{display:none}
+#atmos-canvas{display:none}
+body > main,body > header,body > footer{position:relative;z-index:2}
+
+/* ---------- links ------------------------------------------------------ */
+.u-link{
+  position:relative;display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--text-80);padding-bottom:5px;
+}
+.u-link::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--text-40);transform-origin:left;
+  transition:background-color .35s,transform .45s var(--ease-out);
+}
+.u-link:hover{color:var(--text)}
+.u-link:hover::after{background:var(--accent)}
+.u-link svg{transition:transform .4s var(--ease-out)}
+.u-link:hover svg{transform:translate(3px,-3px)}
+
+/* action — sharp, hairline, no pill */
+.action{
+  display:inline-flex;align-items:center;gap:14px;
+  border:1px solid var(--line);padding:15px 24px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--text);position:relative;overflow:hidden;
+  transition:color .45s var(--ease-out),border-color .45s;
+}
+.action__fill{
+  position:absolute;inset:0;background:var(--accent);
+  transform:scaleY(0);transform-origin:bottom;z-index:-1;
+  transition:transform .55s var(--ease-power4);
+}
+.action:hover{color:#0A0807;border-color:var(--accent)}
+.action:hover .action__fill{transform:scaleY(1)}
+.action svg{transition:transform .4s var(--ease-out)}
+.action:hover svg{transform:translate(3px,-3px)}
+
+/* ---------- reveal primitives ------------------------------------------
+   IMPORTANT: these are VISIBLE by default. The hidden state is applied by JS
+   only, so a no-JS or failed-animation visitor still sees the whole page. */
+.first-frame .reveal-up{opacity:0;transform:translateY(34px)}
+.first-frame .reveal-fade{opacity:0}
+.line-mask{display:block;overflow:hidden}
+.line-mask>span{display:block}
+.first-frame .line-mask>span{transform:translateY(108%)}
+.word{display:inline-block}
+
+/* ---------- footer ----------------------------------------------------- */
+.foot{
+  border-top:1px solid var(--line);padding-block:clamp(40px,6vw,72px) clamp(24px,3vw,36px);
+}
+.foot__line{
+  display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
+  gap:14px 32px;
+}
+.foot__id{font-family:var(--display);font-weight:200;font-size:clamp(20px,2.4vw,32px);letter-spacing:.06em}
+.foot__status{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-40)}
+.foot__dot{
+  display:inline-block;width:4px;height:4px;border-radius:99px;background:var(--accent);
+  margin-right:8px;vertical-align:middle;
+}
+.foot__legal{
+  margin-top:clamp(28px,4vw,48px);padding-top:18px;border-top:1px solid var(--line-soft);
+  font-family:var(--mono);font-size:9px;line-height:1.9;letter-spacing:.1em;
+  color:var(--text-20);max-width:78ch;text-transform:uppercase;
+}
+
+/* ---------- shared page-header ----------------------------------------- */
+.phead{
+  min-height:clamp(58vh,72svh,760px);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding-top:clamp(96px,16vh,180px);
+  padding-bottom:clamp(40px,6vw,72px);
+  border-bottom:1px solid var(--line);
+}
+.phead__meta{display:flex;flex-wrap:wrap;gap:10px 30px;margin-bottom:clamp(20px,3vw,34px)}
+
+/* ---------- prose ------------------------------------------------------ */
+.prose{max-width:66ch}
+.prose>*+*{margin-top:1.15em}
+.prose p{font-size:clamp(15.5px,1.15vw,17.5px);line-height:1.82;color:var(--text-80)}
+.prose h2{font-family:var(--display);font-weight:200;font-size:clamp(24px,3vw,40px);line-height:1.06;letter-spacing:-.018em;margin-top:2.4em;color:var(--text)}
+.prose h3{font-family:var(--display);font-weight:200;font-size:clamp(19px,2.1vw,26px);line-height:1.2;letter-spacing:-.01em;margin-top:2em;color:var(--text)}
+.prose strong{font-weight:500;color:var(--text)}
+.prose em{font-style:italic}
+.prose a{color:var(--text);border-bottom:1px solid var(--accent-40)}
+.prose a:hover{border-bottom-color:var(--accent)}
+.prose ul{display:grid;gap:11px}
+.prose ul li{position:relative;padding-left:26px;font-size:clamp(15.5px,1.15vw,17.5px);line-height:1.75;color:var(--text-80)}
+.prose ul li::before{
+  content:"";position:absolute;left:2px;top:.86em;width:9px;height:1px;background:var(--accent);
+}
+.prose blockquote{
+  margin:2.4em 0;padding-left:clamp(20px,3vw,36px);border-left:1px solid var(--accent);
+  font-family:var(--display);font-weight:200;font-style:italic;
+  font-size:clamp(20px,2.4vw,30px);line-height:1.34;letter-spacing:-.015em;color:var(--text);
+}
+.prose blockquote cite{
+  display:block;margin-top:14px;font-family:var(--mono);font-style:normal;
+  font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-40);
+}
+.note{
+  border-left:1px solid var(--accent);padding:2px 0 2px clamp(18px,2.4vw,26px);
+  font-size:14.5px;line-height:1.75;color:var(--text-60);
+}
+.note strong{color:var(--text);font-weight:500}
+
+/* ---------- data table (no cards) -------------------------------------- */
+.data{width:100%;border-collapse:collapse}
+.data caption{text-align:left;padding-bottom:18px;caption-side:top}
+.data th,.data td{text-align:left;padding:20px 0;border-bottom:1px solid var(--line-soft);vertical-align:baseline}
+.data th{font-family:var(--mono);font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-40);font-weight:400;border-bottom-color:var(--line)}
+.data td:first-child{font-family:var(--display);font-weight:200;font-size:clamp(18px,2vw,24px);letter-spacing:-.012em;color:var(--text);width:42%}
+.data td:nth-child(2){font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--text-40)}
+.data td:last-child{text-align:right;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--text-80);white-space:nowrap}
+
+/* ---------- faq (accordion as ledger, not cards) ----------------------- */
+.ledger{border-top:1px solid var(--line)}
+.ledger details{border-bottom:1px solid var(--line-soft)}
+.ledger summary{
+  display:flex;justify-content:space-between;align-items:baseline;gap:26px;
+  padding:24px 0;cursor:pointer;list-style:none;
+  font-family:var(--display);font-weight:200;
+  font-size:clamp(18px,2.1vw,25px);line-height:1.24;letter-spacing:-.014em;
+  transition:color .3s;
+}
+.ledger summary::-webkit-details-marker{display:none}
+.ledger summary:hover{color:var(--accent)}
+.ledger summary::after{
+  content:"";flex:none;width:9px;height:9px;margin-top:9px;
+  border-right:1px solid var(--text-40);border-bottom:1px solid var(--text-40);
+  transform:rotate(45deg);transition:transform .4s var(--ease-out),border-color .3s;
+}
+.ledger details[open] summary::after{transform:rotate(-135deg);border-color:var(--accent)}
+.ledger__body{padding:0 0 30px;max-width:64ch;font-size:15.5px;line-height:1.8;color:var(--text-60)}
+.ledger__body p+p{margin-top:1em}
+
+/* ---------- forms ------------------------------------------------------ */
+.form{display:grid;gap:26px;max-width:580px}
+.field{display:grid;gap:8px}
+.field label{font-family:var(--mono);font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-40)}
+.field input,.field textarea,.field select{
+  font-family:var(--body);font-weight:300;font-size:16px;color:var(--text);
+  background:transparent;border:0;border-bottom:1px solid var(--line);
+  padding:10px 0;border-radius:0;
+  transition:border-color .35s;
+}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-bottom-color:var(--accent)}
+.field input:hover,.field textarea:hover,.field select:hover{border-bottom-color:var(--text-40)}
+.field textarea{resize:vertical;min-height:96px}
+.field select{appearance:none;cursor:pointer}
+.field select option{background:var(--void-2);color:var(--text)}
+
+/* ---------- image treatments ------------------------------------------ */
+/* TREATMENT 03 — DUOTONE SEAL */
+.duo{position:relative;isolation:isolate;overflow:hidden;background:var(--void-2)}
+.duo img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.15) brightness(.8)}
+.duo::before{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:#2A1A12;mix-blend-mode:color;opacity:.72;
+}
+.duo::after{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    radial-gradient(75% 60% at 40% 30%, transparent 30%, rgba(8,7,6,.55) 100%),
+    linear-gradient(to top, rgba(8,7,6,.9), transparent 55%);
+}
+/* TREATMENT 01 — SILENT WITNESS (portrait) */
+.witness{position:relative;overflow:hidden;background:var(--void-2)}
+/* no transition on filter: nothing hovers this, and a .3s one would break the
+   motion rule if anything ever did. The treatment is static by design. */
+.witness img{
+  width:100%;filter:grayscale(100%) contrast(1.45) brightness(.62);
+}
+.witness::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(105deg, rgba(8,7,6,.92) 0%, rgba(8,7,6,.45) 38%, transparent 68%),
+    linear-gradient(to top, rgba(8,7,6,.75), transparent 42%);
+}
+/* TREATMENT 04 — FRAGMENT */
+.fragment{position:relative;overflow:hidden}
+.fragment img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.2) brightness(.72)}
+/* the .3s filter transition that used to sit on .fragment img was inert — no
+   rule ever hovered it — and has been removed rather than left as a trap. */
+
+/* ---------- placeholder tokens ---------------------------------------- */
+.ph{
+  border-bottom:1px dashed var(--accent-40);color:inherit;
+}
+
+/* ---------- responsive ------------------------------------------------- */
+@media (max-width:1024px){
+  .split--7-5,.split--5-7,.split--4-8{grid-template-columns:minmax(0,1fr)}
+  .gutter-note{grid-template-columns:minmax(0,1fr);gap:14px}
+}
+@media (max-width:820px){
+  .rail{border-left:0}
+  body{line-height:1.75}
+  /* The data table was hiding its second column's cells but not its second
+     header, so the header row still spanned three columns and clipped the
+     third. On a phone the table becomes a list instead: the session name on
+     one line, then duration and what it is charged as beneath it. Nothing is
+     dropped. */
+  .data thead{display:none}
+  .data tr{display:block;padding:20px 0;border-bottom:1px solid var(--line-soft)}
+  .data td{display:inline;padding:0;border:0}
+  .data td:first-child{display:block;width:auto;margin-bottom:6px}
+  .data td:nth-child(2){display:inline;font-size:11px}
+  .data td:last-child{text-align:left;display:inline}
+  /* a literal middle dot: the \00b7 escape swallows the space after it */
+  .data td:last-child::before{content:" \00b7\00a0";color:var(--text-40)}
+}
+
+/* ---------- reduced motion -------------------------------------------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;scroll-behavior:auto !important;
+  }
+  .reveal-up,.reveal-fade{opacity:1;transform:none}
+  .line-mask>span{transform:none}
+  .preloader{display:none}
+  .cursor-dot,.cursor-ring{display:none}
+}
+
+/* ---------- legal navigation ------------------------------------------- */
+/* The six chapters stay six. Legal documents sit outside the numbered
+   sequence — they are reference, not part of the reading. */
+.foot__nav{
+  display:flex;flex-wrap:wrap;gap:6px 22px;
+  margin-top:22px;padding-top:20px;
+  border-top:1px solid var(--line-soft);
+}
+.foot__nav a{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--text-40);text-decoration:none;
+  transition:color .4s var(--ease-out);
+}
+.foot__nav a:hover,.foot__nav a:focus-visible{color:var(--text)}
+.foot__nav a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+
+.index__legal{
+  display:flex;flex-wrap:wrap;gap:8px 28px;
+  padding:clamp(16px,2.4vh,26px) 0 clamp(16px,2vh,22px);
+  border-top:1px solid var(--line-soft);
+  margin-top:clamp(10px,2vh,20px);
+}
+.index__legal a{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--text-40);text-decoration:none;
+  transition:color .4s var(--ease-out);
+}
+.index__legal a:hover,.index__legal a:focus-visible{color:var(--text)}
+.index__legal a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+
+/* ---------- colophon --------------------------------------------------- */
+.foot__colophon{
+  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;
+  gap:10px 34px;
+  margin-top:clamp(18px,2.6vh,28px);padding-top:18px;
+  border-top:1px solid var(--line-soft);
+  font-family:var(--mono);font-size:9.5px;line-height:1.9;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--text-60);
+}
+.foot__made{display:inline-flex;align-items:center;gap:.55em;flex-wrap:wrap}
+.foot__heart{
+  width:11px;height:11px;flex:none;
+  color:var(--accent);
+  transform-origin:center;
+  /* One shallow beat every four and a half seconds — the only warmth in an
+     otherwise austere site. Silent under reduced motion. */
+  animation:heartbeat 4.6s cubic-bezier(.2,0,0,1) infinite;
+}
+@keyframes heartbeat{
+  0%,90%,100%{transform:scale(1)}
+  94%{transform:scale(1.16)}
+}
+.foot__copy{color:var(--text-60)}
+@media (prefers-reduced-motion:reduce){ .foot__heart{animation:none} }
+@media (max-width:620px){
+  .foot__colophon{flex-direction:column;align-items:flex-start;gap:8px}
+}
+
+/* The footer carries a safety disclaimer and legal navigation. Neither is
+   decoration, so neither may sit at the 1.6:1 and 3.3:1 ratios used for
+   marginalia — that would make the accessibility page's claims untrue. */
+.foot__legal{color:var(--text-60)}
+.foot__nav a{color:var(--text-60)}
+.index__legal a{color:var(--text-60)}

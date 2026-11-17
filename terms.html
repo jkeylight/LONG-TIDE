@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Terms of Use — Long Tide</title>
+<meta name="description" content="The terms on which this website is offered: use of content, appointments and fees, liability, and governing law.">
+<meta name="theme-color" content="#080706">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080706'/%3E%3Cg fill='none' stroke='%23EDE9E0' stroke-width='1'%3E%3Ccircle cx='16' cy='16' r='2' fill='%23B24B2C' stroke='none'/%3E%3Cpath d='M11.2 16a4.8 4.8 0 0 1 4.8-4.8M20.8 16a4.8 4.8 0 0 1-4.8 4.8'/%3E%3Cpath d='M6.6 16a9.4 9.4 0 0 1 9.4-9.4M25.4 16a9.4 9.4 0 0 1-9.4 9.4'/%3E%3C/g%3E%3C/svg%3E">
+<script>
+(function () {
+  var d = document.documentElement;
+  d.classList.add('first-frame');
+  try {
+    var arrived = sessionStorage.getItem('sp:nav') === '1';
+    /* the panel is claimed here, synchronously, so it is covering at first
+       paint — not after a script has had time to run */
+    if (!arrived) d.classList.add('is-loading');
+    if (arrived) {
+      sessionStorage.removeItem('sp:nav');
+      window.SP_ARRIVED = true;
+      d.classList.add('nav-in');
+      /* if any module fails to run, the page must never stay covered */
+      setTimeout(function () { d.classList.remove('nav-in'); }, 3000);
+    }
+  } catch (e) {}
+})();
+</script>
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/core.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+<div class="preloader" aria-hidden="true">
+  <span class="preloader__word">still</span>
+  <span class="preloader__rule" aria-hidden="true"></span>
+  <span class="preloader__count">000</span>
+</div>
+<div class="curtain" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="atmos" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<canvas id="atmos-canvas" aria-hidden="true"></canvas>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<aside class="rail" aria-label="Site">
+  <a class="rail__mark" href="index.html"><span>Long Tide</span></a>
+  <button class="rail__toggle" data-open-index aria-expanded="false">Index</button>
+  <span class="rail__index">DOC — 03</span>
+</aside>
+
+<div class="index" id="index" role="dialog" aria-modal="true" aria-label="Index">
+  <div class="index__top">
+    <span class="mono mono--wide" style="color:var(--text-60)">Long Tide — Index</span>
+    <button class="index__close">Close</button>
+  </div>
+  <nav class="index__body" aria-label="Primary">
+    <a class="index__link" href="index.html"><span class="n">01</span><span class="t">The Inscription</span><span class="m">Enter</span></a>
+    <a class="index__link" href="the-work.html"><span class="n">02</span><span class="t">The Work</span><span class="m">Doctrine</span></a>
+    <a class="index__link" href="sessions.html"><span class="n">03</span><span class="t">Sessions</span><span class="m">Practice</span></a>
+    <a class="index__link" href="about.html"><span class="n">04</span><span class="t">The Practitioner</span><span class="m">Lineage</span></a>
+    <a class="index__link" href="resources.html"><span class="n">05</span><span class="t">Resources</span><span class="m">Archive</span></a>
+    <a class="index__link" href="contact.html"><span class="n">06</span><span class="t">Contact</span><span class="m">Threshold</span></a>
+  </nav>
+  <nav class="index__legal" aria-label="Reference">
+    <a href="understanding.html">Understanding the work</a>
+    <a href="the-room.html">The room</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="disclaimer.html">Medical disclaimer</a>
+    <a href="terms.html">Terms</a>
+    <a href="accessibility.html">Accessibility</a>
+  </nav>
+  <div class="index__foot">
+    <span class="mono mono--sm" style="color:var(--text-20)"><span data-site="city">Mumbai</span></span>
+    <span class="mono mono--sm" style="color:var(--text-20)">Est. <span data-site="founded">2019</span></span>
+  </div>
+</div>
+
+<main id="main">
+
+<section class="doc" aria-labelledby="doc-title">
+  <header class="doc__head">
+    <p class="doc__eyebrow">Legal &middot; 03</p>
+    <h1 class="doc__h" id="doc-title">Terms of <em>use</em></h1>
+    <div class="doc__meta"><span>Version 1.0</span><span>Applies from <time datetime="2026-11-16">16 November 2026</time></span><span>Website terms</span></div>
+    <div class="doc__rule"></div>
+  </header>
+
+  <div class="doc__grid">
+    <article class="doc__body">
+
+      <p class="doc__note">These terms cover use of this website. The clinical disclaimer is separate and sits on its own
+      page: <a href="disclaimer.html">medical disclaimer</a>.</p>
+
+      <h2 id="agreement">01 &middot; Agreement</h2>
+      <p>By using this website you accept these terms. If you do not accept them, that is fine &mdash; simply do not use
+      the site.</p>
+
+      <h2 id="use">02 &middot; Using the site</h2>
+      <p>You may read, print and share the pages here for your own personal, non-commercial use. You may link to any
+      page. You may not:</p>
+      <ul>
+        <li>copy the site's design, type, text or images into another website or product;</li>
+        <li>present the content as your own, or on behalf of another practitioner;</li>
+        <li>use the enquiry form to send advertising, automated or bulk messages;</li>
+        <li>attempt to interfere with the site's operation.</li>
+      </ul>
+
+      <h2 id="accuracy">03 &middot; Accuracy of information</h2>
+      <p>The content is written carefully and checked, but it is general information that may become out of date. Fees,
+      availability and practical details can change without the site being updated immediately. The
+      <a href="disclaimer.html">medical disclaimer</a> explains the limits of what any of this can be relied on for.</p>
+
+      <h2 id="ip">04 &middot; Intellectual property</h2>
+      <p>The writing, photography, typefaces and design of this site belong to their respective owners. The typefaces are
+      licensed for use on this site. Book titles and author names on the <a href="resources.html">resources page</a>
+      belong to their authors and publishers and are listed for reference only.</p>
+
+      <h2 id="bookings">05 &middot; Appointments, fees and cancellation</h2>
+      <p>Sending an enquiry does not create a booking. An appointment exists only once it has been agreed in writing and
+      confirmed.</p>
+      <p>The practice's fees, cancellation window and cancellation charges are set out on the
+      <a href="sessions.html">sessions page</a> and in the booking confirmation. The fee shown there is the fee
+      charged; there are no additional costs.</p>
+
+      <h2 id="liability">06 &middot; Liability</h2>
+      <p>This website is provided as it is. To the extent the law allows, I accept no liability for any loss arising from
+      reliance on its general content. Nothing in these terms limits liability for death or personal injury caused by
+      negligence, for fraud, or for anything else that cannot lawfully be limited.</p>
+      <p>Liability in relation to treatment is a separate matter, governed by your agreement at the time of booking and
+      by the law of the jurisdiction where the session takes place.</p>
+
+      <h2 id="law">07 &middot; Governing law</h2>
+      <p>These terms are governed by the laws of <span data-site="country">India</span>, and the courts of
+      <span data-site="city">Mumbai</span> have exclusive jurisdiction over any dispute about the website.</p>
+
+      <h2 id="access">08 &middot; Accessibility</h2>
+      <p>I have tried to make this site usable by as many people as possible, and I say plainly what still falls short on
+      the <a href="accessibility.html">accessibility page</a>. If the site gets in your way, my contact details are on the
+      <a href="contact.html">contact page</a> and I would like to hear about it.</p>
+
+      <h2 id="changes">09 &middot; Changes</h2>
+      <p>These terms may be updated; the version and date at the top of this page always show the current one.
+      Continuing to use the site after a change means you accept it.</p>
+
+      <h2 id="contact">10 &middot; Contact</h2>
+      <p><span data-site="practitioner">Poonam Mahendra</span> &middot;
+      <a href="mailto:poonam@craniosacraltherapy.com" data-site-href="email" data-site="email">poonam@craniosacraltherapy.com</a> &middot;
+      <a href="tel:+919987894488" data-site-href="phone" data-site="phone">+91 99878 94488</a></p>
+
+    </article>
+
+    <nav class="doc__toc" aria-label="Contents of this document">
+      <p>On this page</p>
+      <ol>
+        <li><a href="#agreement">Agreement</a></li>
+        <li><a href="#use">Using the site</a></li>
+        <li><a href="#accuracy">Accuracy</a></li>
+        <li><a href="#ip">Intellectual property</a></li>
+        <li><a href="#bookings">Appointments &amp; fees</a></li>
+        <li><a href="#liability">Liability</a></li>
+        <li><a href="#law">Governing law</a></li>
+        <li><a href="#access">Accessibility</a></li>
+        <li><a href="#changes">Changes</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__line">
+      <span class="foot__id">Long&nbsp;Tide</span>
+      <span class="foot__status"><span class="foot__dot"></span>Craniosacral therapy &middot; <span data-site="city">Mumbai</span> &middot; Est. <span data-site="founded">2019</span></span>
+      <span class="foot__status" data-clock>&mdash;</span>
+    </div>
+    <p class="foot__legal">
+      Craniosacral therapy is a complementary modality. It is not a substitute for medical diagnosis, treatment or emergency care. Information on this site is general and is not medical advice. Consult a qualified healthcare professional about your own circumstances.
+    </p>
+    <nav class="foot__nav" aria-label="Legal and accessibility">
+      <a href="privacy.html">Privacy</a>
+      <a href="disclaimer.html">Medical disclaimer</a>
+      <a href="terms.html">Terms</a>
+      <a href="accessibility.html">Accessibility</a>
+    </nav>
+
+    <div class="foot__colophon">
+      <p class="foot__made">
+        Made with
+        <svg class="foot__heart" viewBox="0 0 24 24" role="img" aria-label="love" focusable="false"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        by <span data-site="designer">Norman James</span> @ <span data-site="studio">Empathy Studio</span>
+      </p>
+      <p class="foot__copy">&copy; <span data-year>2026</span> <span data-site="practitioner">Poonam Mahendra</span>. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+<script src="assets/vendor/three.min.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/split-text.js"></script>
+<script src="assets/js/cursor.js"></script>
+<script src="assets/js/preloader.js"></script>
+<script src="assets/js/lenis-init.js"></script>
+<script src="assets/js/animations.js"></script>
+<script src="assets/js/transitions.js"></script>
+<script src="assets/js/atmos.js"></script>
+<script src="assets/js/form.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/page.js"></script>
+</body>
+</html>

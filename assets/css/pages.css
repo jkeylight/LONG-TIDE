@@ -1,0 +1,833 @@
+/* ==========================================================================
+   INTERIOR PAGES — each opens with a different hero archetype
+   ========================================================================== */
+
+/* ---------- TYPE 04 · THE MANUSCRIPT REVEAL (the-work) ----------------- */
+.ms{
+  min-height:100vh;min-height:100svh;
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(72px,12vh,140px) calc(var(--rail) + clamp(16px,3vw,40px)) clamp(56px,8vh,100px) var(--pad);
+  position:relative;overflow:hidden;
+}
+.ms__col{position:relative;width:100%;max-width:680px}
+.ms__masthead{
+  font-family:var(--display);font-weight:200;font-size:13px;
+  letter-spacing:.4em;text-transform:uppercase;color:var(--text-60);
+  font-variant:small-caps;
+}
+.ms__rule{height:1px;background:var(--text-20);margin-block:26px;transform-origin:left;transform:scaleX(0)}
+.ms__h{
+  font-family:var(--display);font-weight:200;font-style:italic;
+  font-size:clamp(30px,4.6vw,58px);line-height:1.08;letter-spacing:-.02em;
+}
+.ms__h span{display:block}
+.ms__body{
+  margin-top:32px;font-size:clamp(15.5px,1.2vw,17.5px);line-height:1.82;color:var(--text-80);
+}
+.ms__body::first-letter{
+  font-family:var(--display);font-weight:200;font-size:4.1em;line-height:.82;
+  float:left;padding:.06em .12em 0 0;color:var(--accent);
+}
+.ms__margin{
+  position:absolute;right:calc(-1 * clamp(52px,7vw,120px));top:6px;
+  writing-mode:vertical-rl;
+  color:var(--text-20);white-space:nowrap;
+}
+@media (max-width:1180px){ .ms__margin{display:none} }
+
+/* ---------- TYPE 02 · THE DARK PORTRAIT (about) ------------------------ */
+.dp{
+  min-height:100vh;min-height:100svh;position:relative;overflow:hidden;
+  display:grid;place-items:end start;
+  padding:clamp(80px,12vh,130px) calc(var(--rail) + clamp(16px,3vw,40px)) clamp(48px,7vh,90px) var(--pad);
+}
+.dp__figure{
+  position:absolute;inset:0;z-index:0;margin:0;overflow:hidden;
+}
+.dp__figure img{
+  width:100%;height:112%;object-fit:cover;object-position:58% 22%;
+  filter:grayscale(100%) contrast(1.5) brightness(.5);
+  transform:translateY(0);
+}
+.dp__figure::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(to top, rgba(8,7,6,.96) 0%, rgba(8,7,6,.6) 34%, rgba(8,7,6,.15) 62%, rgba(8,7,6,.55) 100%),
+    linear-gradient(100deg, rgba(8,7,6,.85) 0%, transparent 55%);
+}
+.dp__copy{position:relative;z-index:2;max-width:min(760px,72vw)}
+.dp__name{
+  font-family:var(--display);font-weight:200;
+  font-size:clamp(42px,8.4vw,132px);line-height:.9;letter-spacing:-.03em;
+}
+.dp__role{margin-top:18px;color:var(--text-60)}
+.dp__statement{
+  margin-top:clamp(22px,3vw,34px);max-width:44ch;
+  font-size:clamp(15.5px,1.3vw,19px);line-height:1.72;color:var(--text-80);
+}
+@media (max-width:760px){
+  .dp__copy{max-width:100%}
+  .dp__figure img{object-position:62% 18%}
+}
+
+/* ---------- TYPE 15 · THE EMPTY CHAIR (contact) ------------------------ */
+.ec{
+  min-height:100vh;min-height:100svh;position:relative;
+  display:grid;place-items:center;
+  padding:clamp(72px,10vh,120px) calc(var(--rail) + clamp(16px,3vw,40px)) clamp(56px,8vh,90px) var(--pad);
+}
+.ec__rect{
+  position:relative;width:min(340px,62vw);aspect-ratio:3/4;
+  border:1px solid var(--accent-40);
+  display:grid;place-items:center;padding:24px;
+  transition:border-color .6s;
+  animation:breathe 6s ease-in-out infinite;
+}
+@keyframes breathe{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.011)}
+}
+.ec__rect:hover{border-color:var(--accent)}
+.ec__q{
+  font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--text-60);text-align:center;line-height:2.2;
+}
+/* hidden only when JS has taken ownership — never a CSS-only blank state */
+.first-frame .ec__q{opacity:0}
+.ec__meta{
+  position:absolute;left:var(--pad);top:clamp(76px,11vh,120px);
+  color:var(--text-20);
+}
+.ec__meta .mono{color:var(--text-20)}
+.ec__foot{
+  position:absolute;left:var(--pad);right:calc(var(--rail) + var(--pad));bottom:clamp(28px,5vh,56px);
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 28px;
+}
+@media (max-width:700px){ .ec__rect{width:min(280px,70vw)} }
+
+/* ---------- TYPE 12 · THE LINEAGE DOCUMENT (resources) ----------------- */
+.ld{
+  min-height:100vh;min-height:100svh;
+  padding:clamp(80px,12vh,150px) calc(var(--rail) + clamp(16px,3vw,40px)) clamp(48px,7vh,84px) var(--pad);
+  display:grid;align-content:center;gap:clamp(24px,4vh,44px);
+  border-bottom:1px solid var(--line);
+}
+.ld__head{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;
+  gap:24px;align-items:end;
+}
+.ld__h{font-size:clamp(32px,6.2vw,96px);line-height:.94;letter-spacing:-.025em}
+.ld__cols{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(18px,3vw,44px);
+  border-top:1px solid var(--line);padding-top:22px;
+}
+.ld__col p+p{margin-top:14px}
+.ld__col .mono{color:var(--text-20);display:block;margin-bottom:10px}
+.ld__col span.t{font-size:14.5px;line-height:1.7;color:var(--text-60);display:block}
+@media (max-width:900px){ .ld__head{grid-template-columns:minmax(0,1fr)} .ld__cols{grid-template-columns:minmax(0,1fr);gap:22px} }
+
+/* ---------- TYPE 03 · THE VOID ENTRANCE (sessions) --------------------- */
+.ve{
+  min-height:100vh;min-height:100svh;position:relative;overflow:hidden;
+  display:grid;grid-template-rows:auto 1fr auto;
+  padding:clamp(28px,4vw,44px) calc(var(--rail) + clamp(16px,3vw,40px)) clamp(34px,5vh,56px) var(--pad);
+}
+/* the portal sits in the right third; copy takes the left. They never overlap. */
+.ve__portal{
+  position:absolute;right:clamp(6%,9vw,16%);top:50%;transform:translateY(-50%);
+  width:clamp(130px,13vw,210px);height:clamp(300px,42vh,500px);
+  background:
+    linear-gradient(to bottom, rgba(237,233,224,.2), rgba(237,233,224,.04) 58%, transparent);
+  filter:blur(.4px);
+  pointer-events:none;
+}
+.ve__portal::after{
+  content:"";position:absolute;inset:-7%;border:1px solid rgba(237,233,224,.12);
+  filter:blur(1px);
+}
+.ve__halo{
+  position:absolute;right:clamp(2%,4vw,9%);top:50%;transform:translateY(-50%);
+  width:clamp(280px,38vw,620px);height:clamp(280px,38vw,620px);
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(237,233,224,.13), transparent 62%);
+  pointer-events:none;filter:blur(28px);
+}
+.ve__top,.ve__bottom{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.ve__center{
+  position:relative;z-index:2;display:flex;flex-direction:column;
+  align-items:flex-start;justify-content:center;text-align:left;
+  gap:clamp(20px,3vh,34px);
+  max-width:min(58%,640px);
+}
+.ve__h{
+  font-size:clamp(34px,6.4vw,96px);line-height:.96;letter-spacing:-.02em;
+  max-width:13ch;
+}
+.ve__sub{max-width:42ch;color:var(--text-80);font-size:clamp(14.5px,1.15vw,17px);line-height:1.78}
+@media (max-width:820px){
+  .ve__center{max-width:100%}
+  .ve__portal{opacity:.32;right:-4%}
+  .ve__halo{opacity:.5}
+}
+
+/* ---------- shared interior section bits ------------------------------- */
+.two-up{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,5vw,84px);align-items:start}
+@media (max-width:1024px){ .two-up{grid-template-columns:minmax(0,1fr)} }
+
+.sticky-col{position:sticky;top:96px;align-self:start}
+@media (max-width:1024px){ .sticky-col{position:static} }
+
+.fee-note{margin-top:20px;max-width:54ch;font-size:14px;line-height:1.75;color:var(--text-40)}
+
+/* definition rows */
+.defs{border-top:1px solid var(--line)}
+.defs>div{
+  display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);
+  gap:clamp(16px,3vw,48px);
+  padding-block:clamp(20px,2.6vw,30px);
+  border-bottom:1px solid var(--line-soft);
+}
+.defs dt{font-family:var(--display);font-weight:200;font-size:clamp(17px,1.9vw,23px);letter-spacing:-.012em;color:var(--text)}
+.defs dd{margin:0;font-size:15px;line-height:1.78;color:var(--text-60)}
+@media (max-width:760px){ .defs>div{grid-template-columns:minmax(0,1fr);gap:8px} }
+
+/* reading list rows */
+.vols{border-top:1px solid var(--line)}
+.vols article{
+  display:grid;grid-template-columns:52px minmax(0,1fr) 120px;
+  gap:clamp(14px,3vw,36px);align-items:baseline;
+  padding-block:clamp(20px,2.6vw,30px);
+  border-bottom:1px solid var(--line-soft);
+  transition:border-color .35s;
+}
+.vols article:hover{border-bottom-color:var(--accent)}
+.vols .n{color:var(--text-20)}
+.vols h3{font-family:var(--display);font-weight:200;font-size:clamp(18px,2.1vw,27px);letter-spacing:-.014em;line-height:1.16;color:var(--text)}
+.vols .by{font-family:var(--display);font-style:italic;font-size:14.5px;color:var(--text-40);margin-top:5px}
+.vols p{font-size:14.5px;line-height:1.72;color:var(--text-60);margin-top:10px;max-width:58ch}
+.vols .tag{text-align:right;color:var(--text-20)}
+@media (max-width:760px){ .vols article{grid-template-columns:32px minmax(0,1fr)} .vols .tag{grid-column:2;text-align:left} }
+
+/* hours / contact detail list */
+.dl-rows{display:grid;gap:0;border-top:1px solid var(--line)}
+.dl-rows>div{
+  display:flex;justify-content:space-between;gap:24px;align-items:baseline;
+  padding-block:14px;border-bottom:1px solid var(--line-soft);
+}
+.dl-rows dt{color:var(--text-40);font-size:14.5px}
+.dl-rows dd{margin:0;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--text-80);text-align:right}
+
+/* ---------- PINNED HORIZONTAL TRACK · the volumes ------------------------
+   Seven volumes read as one shelf. The section pins and the shelf travels
+   sideways while you scroll, so a reader meets the books in order at a
+   readable size rather than scanning seven cramped rows.
+
+   Mobile: no pin. The row becomes a native swipe scroller (.is-native),
+   with scroll-snap — the honest touch pattern. */
+.hx{position:relative}
+/* When the track pins, the section is taller than the viewport. The heading
+   rides at the top of the pinned frame so the reader always knows what they
+   are looking at. */
+.hx .wrap{position:relative;z-index:2}
+/* the shelf's footnote: one measured break, not three stacked ones */
+.hx__note{
+  margin-top:clamp(30px,4.5vh,58px);
+  padding-top:clamp(18px,2.4vh,26px);
+  border-top:1px solid var(--line-soft);
+}
+.hx__note p{color:var(--text-20);text-transform:none;letter-spacing:.08em}
+.hx__head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(20px,4vw,60px);
+  padding-block:clamp(46px,7vh,80px) clamp(24px,4vh,44px);
+  border-bottom:1px solid var(--line-soft);
+}
+.hx__count{color:var(--text-20);flex:none}
+.hx__viewport{
+  position:relative;overflow:hidden;
+  /* padding, not margin: overflow:hidden would clip a negative-margin bleed */
+  padding-top:clamp(40px,7vh,80px);padding-bottom:clamp(20px,3vh,36px);
+  padding-left:var(--pad);
+  padding-right:calc(var(--rail) + clamp(16px,3vw,40px));
+}
+.hx__track{
+  display:flex;gap:clamp(24px,3vw,52px);
+  width:max-content;align-items:stretch;
+  will-change:transform;
+  /* travel is measured from the track's own left edge, so it starts flush */
+  margin-left:0;
+}
+.vol{
+  width:clamp(260px,24vw,340px);flex:none;
+  display:flex;flex-direction:column;gap:18px;
+  padding-top:22px;border-top:1px solid var(--line-soft);
+}
+.vol__n{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;
+  color:var(--accent);text-transform:uppercase;
+}
+.vol h3{
+  font-family:var(--display);font-weight:200;font-size:clamp(21px,2.1vw,29px);
+  line-height:1.16;letter-spacing:-.012em;
+}
+.vol .by{
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--text-40);margin-top:-8px;
+}
+.vol p{color:var(--text-60);font-size:14.5px;line-height:1.75;max-width:34ch}
+.vol .tag{
+  margin-top:auto;padding-top:16px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--text-20);
+}
+/* the shelf's far edge — a hairline that tells you where the row ends */
+.vol--end{
+  width:clamp(170px,15vw,230px);
+  border-top:1px solid transparent;
+  justify-content:flex-end;
+  /* the last thing on the shelf must not slide under the fixed rail */
+  margin-right:calc(var(--rail) + clamp(16px,3vw,40px));
+  padding-top:22px;padding-right:clamp(16px,2vw,32px);
+}
+.vol--end .mono{color:var(--text-20);line-height:2}
+
+@media (max-width:767px){
+  .hx__viewport{
+    padding-bottom:clamp(16px,2.5vh,26px);
+    overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    /* The first card must start at the page's text margin. scroll-padding
+       (not padding) is what snap positions honour — padding alone lets the
+       snap land at offset 0 and clip the card's leading edge. */
+    padding-left:0;padding-right:0;
+    scroll-padding-left:var(--pad);
+  }
+  .hx__track{padding-left:var(--pad);padding-right:var(--pad)}
+  .hx__viewport::-webkit-scrollbar{display:none}
+  .vol{scroll-snap-align:start;width:76vw}
+  .hx__head{flex-direction:column;align-items:flex-start}
+  /* the end cap's rail allowance is desktop-only */
+  .vol--end{margin-right:0;padding-right:0}
+}
+
+/* ==========================================================================
+   LEGAL DOCUMENTS — .doc
+   These pages exist to be read, not watched. No cinematic hero: a masthead,
+   a measure of 68ch, and a sticky contents list. Body type is never dimmer
+   than --text-80, because legal text that fails contrast is legal text
+   nobody can rely on.
+   ========================================================================== */
+.doc{
+  position:relative;
+  padding:clamp(104px,15vh,164px) calc(var(--rail) + clamp(16px,3vw,40px)) clamp(64px,9vh,110px) var(--pad);
+}
+.doc__head{max-width:78ch}
+.doc__eyebrow{
+  font-family:var(--mono);font-size:10px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--accent);
+}
+.doc__h{
+  font-family:var(--display);font-weight:200;font-size:clamp(32px,4.8vw,62px);
+  line-height:1.02;letter-spacing:-.02em;margin-top:20px;
+}
+.doc__h em{font-style:italic;color:var(--text)}
+.doc__meta{
+  display:flex;flex-wrap:wrap;gap:10px 34px;margin-top:26px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--text-60);
+}
+.doc__rule{height:1px;background:var(--line);margin-block:clamp(28px,4vh,44px)}
+
+.doc__grid{
+  display:grid;grid-template-columns:minmax(0,68ch) minmax(170px,230px);
+  gap:clamp(32px,5vw,80px);align-items:start;
+}
+.doc__body{font-size:clamp(15px,1.05vw,16.5px);line-height:1.85;color:var(--text-80)}
+.doc__body > * + *{margin-top:1.15em}
+.doc__body h2{
+  font-family:var(--display);font-weight:200;font-size:clamp(21px,2.2vw,29px);
+  line-height:1.2;letter-spacing:-.01em;color:var(--text);
+  margin-top:2.2em;padding-top:.5em;border-top:1px solid var(--line-soft);
+}
+.doc__body h2:first-child{margin-top:0;border-top:0;padding-top:0}
+.doc__body h3{
+  font-family:var(--body);font-weight:400;font-size:1em;letter-spacing:.01em;
+  color:var(--text);margin-top:1.7em;
+}
+.doc__body ul,.doc__body ol{padding-left:1.15em}
+.doc__body li + li{margin-top:.5em}
+.doc__body li::marker{color:var(--accent)}
+.doc__body strong{font-weight:400;color:var(--text)}
+.doc__body a{
+  color:var(--text);text-decoration:none;
+  border-bottom:1px solid var(--accent);padding-bottom:1px;
+}
+.doc__body a:hover{border-bottom-color:var(--text)}
+.doc__body a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* callouts — used for the emergency block and the plain-language summary */
+.doc__note{
+  border-left:2px solid var(--accent);
+  padding:2px 0 2px 20px;
+  /* spaced top and bottom: as a direct child of the prose it sits flush
+     against the rule above it otherwise */
+  margin-top:clamp(28px,4vh,40px);
+  margin-bottom:clamp(26px,3.6vh,36px);
+  color:var(--text);
+}
+.doc__body > .doc__note:first-child{margin-top:0}
+.doc__note strong{color:var(--accent)}
+.doc__emergency{
+  border:1px solid var(--accent-40);
+  padding:clamp(20px,3vw,30px);
+  background:rgba(178,75,44,.05);
+}
+.doc__emergency h2{margin-top:0;border-top:0;padding-top:0}
+.doc__emergency dd{margin:0}
+.doc__emergency dl{display:grid;gap:12px;margin-top:1em}
+.doc__emergency dt{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--text-60);
+}
+.doc__emergency dd{font-size:1.05em;color:var(--text)}
+.doc__emergency a{border-bottom-color:var(--accent)}
+.doc__num{font-variant-numeric:tabular-nums;letter-spacing:.02em}
+
+/* contents */
+.doc__toc{position:sticky;top:clamp(90px,14vh,140px);font-size:12.5px}
+.doc__toc p{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--text-60);margin-bottom:14px;
+}
+.doc__toc ol{list-style:none;padding:0;margin:0;counter-reset:toc}
+.doc__toc li{counter-increment:toc;margin-top:9px;line-height:1.5}
+.doc__toc a{
+  color:var(--text-60);text-decoration:none;display:grid;
+  grid-template-columns:1.8em 1fr;gap:2px;
+  transition:color .4s;
+}
+.doc__toc a::before{
+  content:counter(toc,decimal-leading-zero);
+  font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--text-40);
+  padding-top:.35em;
+}
+.doc__toc a:hover,.doc__toc a:focus-visible{color:var(--text)}
+.doc__toc a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+
+@media (max-width:980px){
+  .doc__grid{grid-template-columns:1fr}
+  .doc__toc{position:static;order:-1;padding-bottom:26px;border-bottom:1px solid var(--line-soft)}
+  .doc__toc ol{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px 26px}
+}
+
+/* ==========================================================================
+   FORM STATES — the enquiry form must never fail silently
+   ========================================================================== */
+.field--error input,.field--error select,.field--error textarea{
+  border-bottom-color:var(--accent);
+}
+.field__error{
+  display:block;
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  color:var(--accent);margin-top:7px;
+}
+.field__error:empty{display:none}
+.consent{
+  display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;
+  margin-top:26px;font-size:13px;line-height:1.7;color:var(--text-60);
+}
+.consent input{
+  width:17px;height:17px;margin-top:.28em;accent-color:var(--accent);
+  cursor:pointer;flex:none;
+}
+.consent a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--accent)}
+.consent a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.consent--error{color:var(--text)}
+.consent--error .consent__box{outline:1px solid var(--accent);outline-offset:4px}
+
+/* honeypot: hidden from people, offered to bots */
+.hp{
+  position:absolute!important;left:-9999px!important;
+  width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;
+}
+
+.form__status{
+  margin-top:22px;padding:16px 20px;
+  border-left:2px solid var(--accent);
+  font-size:13.5px;line-height:1.7;color:var(--text);
+  background:rgba(178,75,44,.05);
+}
+.form__status:empty{display:none}
+.form__status[data-state="ok"]{border-left-color:var(--text-60)}
+.form__status a{border-bottom:1px solid var(--accent);text-decoration:none;color:var(--text)}
+.action[aria-disabled="true"]{opacity:.45;pointer-events:none}
+
+/* ==========================================================================
+   UNDERSTANDING — .uo
+   Six ideas from the clinical lecture, rewritten for a general reader.
+   Visual language: hairlines, one accent, measured type. The deck this came
+   from was glass panels and neon; none of that survives. What survives is
+   its one genuinely good idea — a depth scale running beside the text,
+   showing how deep into the body each section goes.
+   ========================================================================== */
+.uo{
+  padding:clamp(104px,15vh,168px) calc(var(--rail) + clamp(16px,3vw,40px)) clamp(60px,9vh,110px) var(--pad);
+}
+.uo__head{max-width:74ch}
+.uo__kicker{
+  font-family:var(--mono);font-size:10px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--accent);
+}
+.uo__title{
+  font-family:var(--display);font-weight:200;
+  font-size:clamp(34px,5.2vw,68px);line-height:1.02;letter-spacing:-.022em;
+  margin-top:22px;
+}
+.uo__title em{font-style:italic;font-weight:200;color:var(--text)}
+.uo__standfirst{
+  margin-top:26px;max-width:52ch;
+  font-size:clamp(16px,1.25vw,19px);line-height:1.7;color:var(--text-80);
+}
+.uo__honest{
+  margin-top:clamp(30px,4.4vh,44px);padding:20px 0 20px 22px;
+  border-left:1px solid var(--accent);
+  max-width:62ch;font-size:14px;line-height:1.8;color:var(--text-60);
+}
+.uo__honestLabel{
+  display:block;margin-bottom:8px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);
+}
+.uo__honest em{font-style:italic;color:var(--text-80)}
+.uo__honest a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--accent)}
+.uo__honest a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+.uo__grid{
+  display:grid;grid-template-columns:minmax(150px,190px) minmax(0,68ch);
+  gap:clamp(34px,6vw,92px);
+  margin-top:clamp(56px,8vh,96px);align-items:start;
+}
+/* both columns open with a small mono line; the section's eyebrow and the
+   rail's title sit on the same baseline so the scale begins level with the
+   text it describes */
+.uo__railTitle{margin-top:0}
+.uo__body .uo__sec:first-child .uo__eyebrow{margin-top:0}
+
+/* ---------- the depth rail ------------------------------------------------ */
+.uo__rail{position:sticky;top:clamp(96px,15vh,150px)}
+.uo__railTitle{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--text-60);line-height:1.9;margin-bottom:20px;
+}
+.uo__rail ol{list-style:none;margin:0;padding:0;position:relative}
+/* one hairline the whole length of the scale */
+.uo__rail ol::before{
+  content:"";position:absolute;left:0;top:6px;bottom:6px;width:1px;
+  background:var(--line-soft);
+}
+.uo__stop{
+  position:relative;display:flex;align-items:center;gap:14px;
+  padding:11px 0 11px 0;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-40);text-decoration:none;
+  transition:color .5s var(--ease-out);
+}
+.uo__tick{
+  position:relative;flex:none;width:1px;height:1px;
+  /* the dot sits on the hairline */
+}
+.uo__tick::before{
+  content:"";position:absolute;left:-3px;top:-3px;
+  width:7px;height:7px;border-radius:50%;
+  border:1px solid var(--line);
+  background:var(--void);
+  transition:background .5s var(--ease-out),border-color .5s var(--ease-out),transform .5s var(--ease-out);
+}
+.uo__stop:hover,.uo__stop:focus-visible{color:var(--text-80)}
+.uo__stop:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.uo__stop.is-on{color:var(--text)}
+.uo__stop.is-on .uo__tick::before{
+  background:var(--accent);border-color:var(--accent);transform:scale(1.25);
+}
+
+/* ---------- sections ------------------------------------------------------ */
+.uo__sec{padding-bottom:clamp(64px,10vh,120px)}
+.uo__sec + .uo__sec{padding-top:clamp(52px,8vh,92px);border-top:1px solid var(--line-soft)}
+.uo__eyebrow{
+  font-family:var(--mono);font-size:10px;letter-spacing:.22em;
+  color:var(--accent);margin-bottom:12px;
+}
+.uo__h2{
+  font-family:var(--display);font-weight:200;
+  font-size:clamp(24px,2.9vw,38px);line-height:1.12;letter-spacing:-.015em;
+  max-width:22ch;
+}
+.uo__prose{margin-top:26px;font-size:clamp(15px,1.05vw,16.5px);line-height:1.85;color:var(--text-80)}
+.uo__prose > * + *{margin-top:1.1em}
+.uo__prose em{font-style:italic;color:var(--text)}
+.uo__lead{
+  font-size:clamp(17px,1.5vw,22px);line-height:1.55;color:var(--text);
+  font-family:var(--display);font-weight:200;
+}
+.uo__caveat{
+  border-left:1px solid var(--line);
+  padding-left:18px;color:var(--text-60);font-size:14px;line-height:1.8;
+}
+
+/* ---------- figures ------------------------------------------------------- */
+/* The drawings carry no words. Every key is real text, so it stays a readable
+   size at 390px wide, can be selected, and is announced as text. */
+.uo__fig{
+  margin:clamp(34px,5vh,54px) 0 clamp(30px,4.5vh,44px);
+  color:var(--text);
+}
+.uo__h2 + .uo__fig{margin-top:clamp(26px,3.6vh,38px)}
+.uo__svg{display:block;overflow:visible}
+/* hairlines stay hairlines however far the drawing is scaled down */
+.uo__svg *{vector-effect:non-scaling-stroke}
+.uo__svg .uo__accent{fill:var(--accent)}
+.uo__svg .uo__accent-ring{fill:none;stroke:var(--accent);stroke-opacity:.5}
+.uo__figArt{display:flex;align-items:center}
+.uo__figArt svg{display:block;width:100%;height:auto}
+.uo__svg--narrow{display:none !important}
+
+/* (a) a wide drawing with its captions beneath */
+.uo__fig--pair .uo__figArt{justify-content:center}
+.uo__fig--pair .uo__figArt svg{max-width:560px}
+.uo__figMid{
+  margin-bottom:14px;text-align:center;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--text-40);
+}
+.uo__figCaps{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px clamp(20px,4vw,48px);
+  margin-top:20px;
+}
+.uo__cap b{display:block;font-weight:400;font-size:14px;line-height:1.4;color:var(--text)}
+.uo__cap span{display:block;margin-top:5px;font-size:12.5px;line-height:1.55;color:var(--text-60)}
+.uo__figNote{margin-top:18px;max-width:52ch;font-size:12.5px;line-height:1.6;color:var(--text-40)}
+
+/* (b) a tall drawing with its key beside it, both sharing one height */
+.uo__fig--stack{
+  display:grid;grid-template-columns:minmax(56px,92px) minmax(0,1fr);
+  gap:clamp(24px,4.5vw,52px);align-items:stretch;
+}
+.uo__fig--stack .uo__figArt{height:100%}
+.uo__fig--stack .uo__figArt svg{height:100%;width:auto;max-width:100%}
+.uo__keys{
+  list-style:none;margin:0;padding:0;
+  display:flex;flex-direction:column;justify-content:space-between;
+  gap:clamp(14px,2.4vh,26px);
+}
+.uo__keys b{display:block;font-weight:400;font-size:15px;line-height:1.35;color:var(--text)}
+.uo__keys span{display:block;margin-top:4px;font-size:12.5px;line-height:1.55;color:var(--text-60)}
+
+/* ---------- the three steps ---------------------------------------------- */
+.uo__steps{list-style:none;margin:1.15em 0 1.4em !important;padding:0}
+.uo__steps li{
+  display:grid;grid-template-columns:3em 1fr;gap:16px;
+  padding:20px 0;border-top:1px solid var(--line-soft);
+}
+.uo__steps li:last-child{border-bottom:1px solid var(--line-soft)}
+.uo__n{
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--accent);
+  padding-top:.45em;
+}
+.uo__steps strong{font-weight:400;color:var(--text)}
+
+/* ---------- closing ------------------------------------------------------- */
+.uo__end{
+  margin-top:clamp(20px,4vh,40px);padding-top:clamp(34px,5vh,54px);
+  border-top:1px solid var(--line);
+}
+.uo__endLine{
+  font-family:var(--display);font-weight:200;font-style:italic;
+  font-size:clamp(22px,2.6vw,34px);line-height:1.25;color:var(--text);
+}
+.uo__endText{margin-top:14px;color:var(--text-60);max-width:46ch;line-height:1.8}
+.uo__endLinks{display:flex;flex-wrap:wrap;gap:10px 32px;margin-top:30px}
+.uo__endLinks a{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--text);text-decoration:none;border-bottom:1px solid var(--accent);
+  padding-bottom:4px;transition:border-color .5s var(--ease-out);
+}
+.uo__endLinks a:hover{border-bottom-color:var(--text)}
+.uo__endLinks a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+
+@media (max-width:900px){
+  .uo__grid{grid-template-columns:1fr;gap:0}
+  .uo__rail{position:static;order:-1;margin-bottom:clamp(30px,5vh,48px);
+            padding-bottom:26px;border-bottom:1px solid var(--line-soft)}
+  .uo__rail ol{display:flex;flex-wrap:wrap;gap:0 22px}
+  .uo__rail ol::before{display:none}
+  .uo__stop{padding:7px 0}
+  .uo__tick{display:none}
+  .uo__railTitle{margin-bottom:6px}
+  /* a tall rail cannot keep its proportions beside five 15px keys on a
+     phone, so the loop is drawn horizontally instead and the keys read
+     as a list beneath it */
+  .uo__fig--stack{grid-template-columns:1fr;gap:26px}
+  .uo__fig--stack .uo__figArt{height:auto;align-items:flex-start}
+  .uo__svg--tall{display:none !important}
+  .uo__svg--narrow{display:block !important;width:100%;height:auto}
+  .uo__keys{gap:18px}
+  .uo__figCaps{grid-template-columns:1fr;gap:16px}
+  .uo__figNote{max-width:none}
+}
+
+/* ---------- fees -------------------------------------------------------- */
+/* One range, stated once. Five identical numbers down a column would read
+   as a template rather than a practice. */
+.fee-range{
+  margin-top:24px;font-family:var(--display);font-weight:200;
+  font-size:clamp(26px,3vw,40px);line-height:1.1;letter-spacing:-.02em;
+  color:var(--text);
+}
+.fee-range span{color:var(--text)}
+.fee-rangeNote{
+  margin-top:12px;max-width:44ch;
+  font-family:var(--mono);font-size:11px;line-height:1.95;
+  letter-spacing:.06em;color:var(--text-60);
+}
+.fee-caveat{
+  margin-top:16px;font-size:13.5px;line-height:1.7;color:var(--text-60);max-width:44ch;
+}
+
+/* ==========================================================================
+   THE ROOM — .pl
+   A sequence of plates, not a gallery of cards. The rhythm is 1 · 2 · 1 · 2 · 1 · 1
+   across a twelve-column grid so the eye moves rather than scans a table. Every
+   image carries the same treatment as the rest of the site — greyscale, contrast,
+   dimmed — which is what stops a set of photographs reading as a stock gallery.
+   ========================================================================== */
+.pl-wrap{
+  padding:clamp(104px,15vh,168px) calc(var(--rail) + clamp(16px,3vw,40px)) clamp(60px,9vh,110px) var(--pad);
+}
+.pl__head{max-width:74ch}
+.pl__kicker{
+  font-family:var(--mono);font-size:10px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--accent);
+}
+.pl__title{
+  font-family:var(--display);font-weight:200;
+  font-size:clamp(34px,5.2vw,68px);line-height:1.02;letter-spacing:-.022em;
+  margin-top:22px;
+}
+.pl__title em{font-style:italic;font-weight:200;color:var(--text)}
+.pl__standfirst{
+  margin-top:26px;max-width:52ch;
+  font-size:clamp(16px,1.25vw,19px);line-height:1.7;color:var(--text-80);
+}
+.pl__note{
+  margin-top:clamp(26px,3.6vh,38px);padding-left:22px;
+  border-left:1px solid var(--line);
+  max-width:56ch;font-size:14px;line-height:1.8;color:var(--text-60);
+}
+
+/* ---------- the sequence -------------------------------------------------- */
+.pl__seq{
+  display:grid;grid-template-columns:repeat(12,1fr);
+  gap:clamp(34px,6vh,74px) clamp(16px,2.6vw,38px);
+  margin-top:clamp(56px,8vh,96px);
+  align-items:start;
+  /* the plates run out to the page edge so the treatment is seen on the crop
+     rather than read as a row of framed pictures. Only the right rail is
+     respected; text above and below stays on its measure. */
+  margin-left:calc(-1 * var(--pad));
+  /* stop at the rail, not under it — the rail is fixed and would otherwise
+     sit on top of the photographs */
+  margin-right:calc(-1 * clamp(16px,3vw,40px));
+}
+.pl{margin:0;position:relative}
+
+.pl__img{overflow:hidden;position:relative;background:var(--void-2)}
+/* The treatment is painted ONCE and never animated. Animating a filter on a
+   full-width photograph repaints the whole image every frame: measured, it cost
+   5.7fps and doubled the p95 frame from 16.8ms to 33.4ms while scrolling.
+   That is the jerk. Brightness is .98 here because the overlay below darkens it
+   back to the same value the old .82 filter produced. */
+.pl__img img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:grayscale(100%) contrast(1.28) brightness(.98);
+}
+/* The only hover response: this veil fades out. Opacity is composited on the
+   GPU, so it costs nothing to run — it does not repaint the photograph. */
+.pl__img::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:var(--void);opacity:.16;
+  transition:opacity .9s var(--ease-out);
+  will-change:opacity;
+}
+/* hover only where a real pointer can hover — on touch, :hover sticks after a
+   tap and the plate would stay lifted until something else is touched */
+@media (hover:hover) and (pointer:fine){
+  .pl:hover .pl__img::after,
+  .pl:focus-within .pl__img::after{opacity:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .pl__img::after{transition:none}
+}
+
+.pl__cap{
+  display:flex;gap:12px;align-items:baseline;
+  margin-top:16px;padding-top:12px;border-top:1px solid var(--line-soft);
+  font-size:13.5px;line-height:1.5;color:var(--text-60);
+}
+.pl__num{
+  font-family:var(--mono);font-size:9px;letter-spacing:.2em;
+  color:var(--accent);flex:none;padding-top:.25em;
+}
+
+/* ---------- the six layouts ----------------------------------------------- */
+.pl--wide {grid-column:span 12}
+.pl--wide .pl__img{aspect-ratio:16/7}
+.pl--half {grid-column:span 6}
+.pl--half .pl__img{aspect-ratio:4/3}
+/* the first of a pair sits low, so the pair is not a symmetrical block */
+/* the right-hand plate of each pair drops, so the pairs never read as a
+   symmetrical block. Figures 2, 4 and 7 are the right-hand items. */
+.pl__seq > figure:nth-of-type(2),
+.pl__seq > figure:nth-of-type(4),
+.pl__seq > figure:nth-of-type(7){margin-top:clamp(30px,6vh,74px)}
+.pl--seven{grid-column:span 7}
+.pl--seven .pl__img{aspect-ratio:16/9}
+.pl--five {grid-column:span 5}
+/* 5/4 keeps a five-column plate roughly level with the 16/9 seven beside it */
+.pl--five .pl__img{aspect-ratio:5/4}
+.pl--wide2{grid-column:span 12}
+.pl--wide2 .pl__img{aspect-ratio:2/1}
+
+/* alternation: the wide plates pull to one side of the measure rather than
+   running the full width — a full-bleed band every time would read as a grid */
+.pl--wide2:nth-of-type(8){grid-column:2 / span 11}
+
+/* ---------- closing ------------------------------------------------------- */
+.pl__end{
+  margin-top:clamp(56px,9vh,104px);padding-top:clamp(34px,5vh,54px);
+  border-top:1px solid var(--line);
+}
+.pl__endLine{
+  font-family:var(--display);font-weight:200;font-style:italic;
+  font-size:clamp(22px,2.6vw,34px);line-height:1.25;color:var(--text);max-width:26ch;
+}
+.pl__endLinks{display:flex;flex-wrap:wrap;gap:10px 32px;margin-top:30px}
+.pl__endLinks a{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--text);text-decoration:none;border-bottom:1px solid var(--accent);
+  padding-bottom:4px;transition:border-color .5s var(--ease-out);
+}
+.pl__endLinks a:hover{border-bottom-color:var(--text)}
+.pl__endLinks a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+
+@media (max-width:900px){
+  .pl__seq{grid-template-columns:1fr;gap:clamp(30px,5vh,54px)}
+  .pl--wide,.pl--half,.pl--seven,.pl--five,.pl--wide2,
+  .pl--wide2:nth-of-type(8){grid-column:span 1}
+  .pl__seq > figure:nth-of-type(2),
+  .pl__seq > figure:nth-of-type(4),
+  .pl__seq > figure:nth-of-type(7){margin-top:0}
+  /* tall plates keep their shape once stacked, so the portrait study does not
+     become a landscape crop */
+  .pl--wide .pl__img{aspect-ratio:4/3}
+  .pl--wide2 .pl__img{aspect-ratio:3/2}
+}

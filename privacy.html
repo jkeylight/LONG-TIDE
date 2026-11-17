@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Privacy Notice — Long Tide</title>
+<meta name="description" content="What this website collects, why, and how long it is kept. No cookies, no analytics, no third-party trackers.">
+<meta name="theme-color" content="#080706">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080706'/%3E%3Cg fill='none' stroke='%23EDE9E0' stroke-width='1'%3E%3Ccircle cx='16' cy='16' r='2' fill='%23B24B2C' stroke='none'/%3E%3Cpath d='M11.2 16a4.8 4.8 0 0 1 4.8-4.8M20.8 16a4.8 4.8 0 0 1-4.8 4.8'/%3E%3Cpath d='M6.6 16a9.4 9.4 0 0 1 9.4-9.4M25.4 16a9.4 9.4 0 0 1-9.4 9.4'/%3E%3C/g%3E%3C/svg%3E">
+<script>
+(function () {
+  var d = document.documentElement;
+  d.classList.add('first-frame');
+  try {
+    var arrived = sessionStorage.getItem('sp:nav') === '1';
+    /* the panel is claimed here, synchronously, so it is covering at first
+       paint — not after a script has had time to run */
+    if (!arrived) d.classList.add('is-loading');
+    if (arrived) {
+      sessionStorage.removeItem('sp:nav');
+      window.SP_ARRIVED = true;
+      d.classList.add('nav-in');
+      /* if any module fails to run, the page must never stay covered */
+      setTimeout(function () { d.classList.remove('nav-in'); }, 3000);
+    }
+  } catch (e) {}
+})();
+</script>
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/core.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+<div class="preloader" aria-hidden="true">
+  <span class="preloader__word">still</span>
+  <span class="preloader__rule" aria-hidden="true"></span>
+  <span class="preloader__count">000</span>
+</div>
+<div class="curtain" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="atmos" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<canvas id="atmos-canvas" aria-hidden="true"></canvas>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<aside class="rail" aria-label="Site">
+  <a class="rail__mark" href="index.html"><span>Long Tide</span></a>
+  <button class="rail__toggle" data-open-index aria-expanded="false">Index</button>
+  <span class="rail__index">DOC — 01</span>
+</aside>
+
+<div class="index" id="index" role="dialog" aria-modal="true" aria-label="Index">
+  <div class="index__top">
+    <span class="mono mono--wide" style="color:var(--text-60)">Long Tide — Index</span>
+    <button class="index__close">Close</button>
+  </div>
+  <nav class="index__body" aria-label="Primary">
+    <a class="index__link" href="index.html"><span class="n">01</span><span class="t">The Inscription</span><span class="m">Enter</span></a>
+    <a class="index__link" href="the-work.html"><span class="n">02</span><span class="t">The Work</span><span class="m">Doctrine</span></a>
+    <a class="index__link" href="sessions.html"><span class="n">03</span><span class="t">Sessions</span><span class="m">Practice</span></a>
+    <a class="index__link" href="about.html"><span class="n">04</span><span class="t">The Practitioner</span><span class="m">Lineage</span></a>
+    <a class="index__link" href="resources.html"><span class="n">05</span><span class="t">Resources</span><span class="m">Archive</span></a>
+    <a class="index__link" href="contact.html"><span class="n">06</span><span class="t">Contact</span><span class="m">Threshold</span></a>
+  </nav>
+  <nav class="index__legal" aria-label="Reference">
+    <a href="understanding.html">Understanding the work</a>
+    <a href="the-room.html">The room</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="disclaimer.html">Medical disclaimer</a>
+    <a href="terms.html">Terms</a>
+    <a href="accessibility.html">Accessibility</a>
+  </nav>
+  <div class="index__foot">
+    <span class="mono mono--sm" style="color:var(--text-20)"><span data-site="city">Mumbai</span></span>
+    <span class="mono mono--sm" style="color:var(--text-20)">Est. <span data-site="founded">2019</span></span>
+  </div>
+</div>
+
+<main id="main">
+
+<section class="doc" aria-labelledby="doc-title">
+  <header class="doc__head">
+    <p class="doc__eyebrow">Legal &middot; 01</p>
+    <h1 class="doc__h" id="doc-title">Privacy <em>notice</em></h1>
+    <div class="doc__meta"><span>Version 1.0</span><span>Applies from <time datetime="2026-11-16">16 November 2026</time></span><span><span data-site="country">India</span> &middot; DPDP Act 2023</span></div>
+    <div class="doc__rule"></div>
+  </header>
+
+  <div class="doc__grid">
+    <article class="doc__body">
+
+      <p class="doc__note"><strong>The short version.</strong> This site sets no cookies, runs no analytics, and loads nothing
+      from any other company. The only information I receive is what you choose to type into the enquiry form, and I use it
+      to answer you. Nothing else is collected, sold or shared.</p>
+
+      <h2 id="who">01 &middot; Who is responsible</h2>
+      <p>This website is operated by <span data-site="practitioner">Poonam Mahendra</span>, a craniosacral therapy practice
+      trading as <span data-site="name">Long Tide</span>, based in <span data-site="city">Mumbai</span>,
+      <span data-site="country">India</span>. For the purposes of data protection law I am the controller of any personal
+      information submitted through it.</p>
+      <p>Data protection enquiries: <a href="mailto:poonam@craniosacraltherapy.com" data-site-href="email" data-site="email">poonam@craniosacraltherapy.com</a>.</p>
+
+      <h2 id="what-not">02 &middot; What this website does not do</h2>
+      <p>These statements are verifiable from the page source, and are the reason this notice is short:</p>
+      <ul>
+        <li><strong>No cookies.</strong> None are set, first-party or otherwise.</li>
+        <li><strong>No analytics or tracking.</strong> There is no Google Analytics, no pixel, no session recording.</li>
+        <li><strong>No third-party requests.</strong> Fonts, scripts and images are all served from this site. Nothing is
+        loaded from a CDN, an advertising network or a social platform, so no other company can see that you visited.</li>
+        <li><strong>No social media buttons.</strong> Those embed trackers even when nobody clicks them.</li>
+        <li><strong>No advertising.</strong></li>
+      </ul>
+      <p>One technical exception, which holds no personal information: while you move between pages this site writes a
+      single value to your browser's <code>sessionStorage</code> so the page-transition animation knows to play. It
+      contains no identifier, and it is erased the moment it is read — typically within a second.</p>
+
+      <h2 id="collect">03 &middot; What I collect, and why</h2>
+      <p>The only collection point is the enquiry form on the <a href="contact.html">contact page</a>. If you use it I
+      receive:</p>
+      <ul>
+        <li>your name and email address (required);</li>
+        <li>your phone number, if you choose to give it;</li>
+        <li>the general reason you selected from a list;</li>
+        <li>anything you write in the free-text box.</li>
+      </ul>
+      <p>I use it for one purpose: to reply to your enquiry and, if you go on to book, to arrange and administer your
+      appointments. I do not use it for marketing, and I will not add you to a mailing list.</p>
+
+      <h2 id="sensitive">04 &middot; Health information</h2>
+      <p>The free-text box is free text, so you may choose to describe symptoms, a diagnosis or an injury. In law that is
+      sensitive personal data, and it deserves to be handled carefully.</p>
+      <p>The form cannot be submitted without ticking the consent box, which records that you agree to your enquiry
+      &mdash; including anything health-related in it &mdash; being used to reply to you. You do not have to describe
+      anything clinical to make an enquiry. A sentence will do.</p>
+      <div class="doc__note"><p><strong>Please do not send medical records</strong>, scans, reports or identity documents
+      through this form. If I need them, I will ask and we will arrange something appropriate.</p></div>
+
+      <h2 id="basis">05 &middot; The lawful basis</h2>
+      <p>For visitors in India, this processing rests on your <strong>consent</strong> under the Digital Personal Data
+      Protection Act, 2023, given by ticking the box, and on the purpose of responding to your request.</p>
+      <p>For visitors in the UK or EU, the basis is your <strong>consent</strong> (Article 6(1)(a) UK GDPR/GDPR), and for
+      any health information, your <strong>explicit consent</strong> (Article 9(2)(a)).</p>
+      <p>You may withdraw consent at any time by writing to me. Withdrawal does not affect anything done before it, and it
+      does not oblige me to delete records I am required by law or professional obligation to keep.</p>
+
+      <h2 id="retention">06 &middot; How long it is kept</h2>
+      <p>Enquiries that do not become appointments are deleted within <strong>twelve months</strong> of the last contact.
+      If you become a client, your records are kept for <strong>seven years</strong> from your last appointment, which is
+      the period ordinarily expected for therapy records and their insurers, and then securely destroyed.</p>
+      <p>You can ask me to delete an enquiry sooner, and I will unless I have a legal reason to keep it.</p>
+
+      <h2 id="sharing">07 &middot; Who sees it</h2>
+      <p>Nobody else, with these narrow exceptions:</p>
+      <ul>
+        <li><strong>My email provider</strong> transmits and stores the message. Email is not perfectly secure, and I
+        would rather you knew that than assumed otherwise.</li>
+        <li><strong>The web host</strong> stores the site. Like any web server it may keep short-lived access logs
+        containing IP addresses; those are not used to identify anyone.</li>
+        <li><strong>Where the law requires it</strong>, or where there is a serious risk to life.</li>
+      </ul>
+      <p>I do not sell data, and I do not share it for advertising.</p>
+
+      <h2 id="rights">08 &middot; Your rights</h2>
+      <p>You may ask to:</p>
+      <ul>
+        <li>see what I hold about you, and receive a copy;</li>
+        <li>correct anything inaccurate;</li>
+        <li>have it erased, where the law allows;</li>
+        <li>withdraw consent, or object to how it is used;</li>
+        <li>nominate another person to exercise these rights on your behalf, in the event of death or incapacity.</li>
+      </ul>
+      <p>Write to <a href="mailto:poonam@craniosacraltherapy.com" data-site-href="email" data-site="email">poonam@craniosacraltherapy.com</a> and I will
+      respond within thirty days. If you are in India and are not satisfied with my response, you may complain to the
+      <strong>Data Protection Board of India</strong>. If you are in the UK or EU, you may complain to your national
+      supervisory authority.</p>
+
+      <h2 id="children">09 &middot; Children</h2>
+      <p>This site is not directed at children. Where a client is under eighteen, an enquiry should be made by a parent or
+      guardian, and their consent covers any information submitted. Under the DPDP Act, processing a child's data without
+      verifiable parental consent is not permitted, and I will ask for it.</p>
+
+      <h2 id="security">10 &middot; Security</h2>
+      <p>Access to enquiries is limited to me, on devices protected by a passcode and full-disk encryption. No system is
+      perfectly secure, and email in particular travels unencrypted. If you would prefer not to use the form, telephone
+      on <a href="tel:+919987894488" data-site-href="phone" data-site="phone">+91 99878 94488</a> instead.</p>
+
+      <h2 id="changes">11 &middot; Changes to this notice</h2>
+      <p>If this notice changes materially I will update the version and date at the top of this page. It is worth
+      re-reading if you return after some months.</p>
+
+      <h2 id="contact">12 &middot; Contact</h2>
+      <p><span data-site="practitioner">Poonam Mahendra</span><br>
+      <span data-site="street">MG Road</span><br>
+      <span data-site="area">Worli</span>, <span data-site="city">Mumbai</span> <span data-site="postcode">400098</span><br>
+      <a href="mailto:poonam@craniosacraltherapy.com" data-site-href="email" data-site="email">poonam@craniosacraltherapy.com</a></p>
+
+    </article>
+
+    <nav class="doc__toc" aria-label="Contents of this document">
+      <p>On this page</p>
+      <ol>
+        <li><a href="#who">Who is responsible</a></li>
+        <li><a href="#what-not">What this site does not do</a></li>
+        <li><a href="#collect">What I collect</a></li>
+        <li><a href="#sensitive">Health information</a></li>
+        <li><a href="#basis">Lawful basis</a></li>
+        <li><a href="#retention">How long it is kept</a></li>
+        <li><a href="#sharing">Who sees it</a></li>
+        <li><a href="#rights">Your rights</a></li>
+        <li><a href="#children">Children</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#changes">Changes</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__line">
+      <span class="foot__id">Long&nbsp;Tide</span>
+      <span class="foot__status"><span class="foot__dot"></span>Craniosacral therapy &middot; <span data-site="city">Mumbai</span> &middot; Est. <span data-site="founded">2019</span></span>
+      <span class="foot__status" data-clock>&mdash;</span>
+    </div>
+    <p class="foot__legal">
+      Craniosacral therapy is a complementary modality. It is not a substitute for medical diagnosis, treatment or emergency care. Information on this site is general and is not medical advice. Consult a qualified healthcare professional about your own circumstances.
+    </p>
+    <nav class="foot__nav" aria-label="Legal and accessibility">
+      <a href="privacy.html">Privacy</a>
+      <a href="disclaimer.html">Medical disclaimer</a>
+      <a href="terms.html">Terms</a>
+      <a href="accessibility.html">Accessibility</a>
+    </nav>
+
+    <div class="foot__colophon">
+      <p class="foot__made">
+        Made with
+        <svg class="foot__heart" viewBox="0 0 24 24" role="img" aria-label="love" focusable="false"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        by <span data-site="designer">Norman James</span> @ <span data-site="studio">Empathy Studio</span>
+      </p>
+      <p class="foot__copy">&copy; <span data-year>2026</span> <span data-site="practitioner">Poonam Mahendra</span>. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+<script src="assets/vendor/three.min.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/split-text.js"></script>
+<script src="assets/js/cursor.js"></script>
+<script src="assets/js/preloader.js"></script>
+<script src="assets/js/lenis-init.js"></script>
+<script src="assets/js/animations.js"></script>
+<script src="assets/js/transitions.js"></script>
+<script src="assets/js/atmos.js"></script>
+<script src="assets/js/form.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/page.js"></script>
+</body>
+</html>
