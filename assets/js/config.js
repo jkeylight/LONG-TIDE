@@ -7,17 +7,17 @@
 const SITE = {
   name        : 'Long Tide',
   discipline  : 'Craniosacral Therapy',
-  practitioner: 'Poonam Mahendra',
+  practitioner: 'The Practitioner',
   /* the portrait headline breaks across two lines deliberately */
-  practitionerFirst: 'Poonam',
-  practitionerLast : 'Mahendra',
+  practitionerFirst: 'The',
+  practitionerLast : 'Practitioner',
   credentials : 'Mumbai',
   city        : 'Mumbai',
   area        : 'Worli',
   street      : 'MG Road',
   postcode    : '400098',
-  phone       : '+91 99878 94488',
-  email       : 'poonam@craniosacraltherapy.com',
+  phone       : '',
+  email       : 'demo@example.com',
   hours       : 'Tuesday to Friday, 9am until 6pm, and Saturday mornings',
   founded     : '2019',
 
