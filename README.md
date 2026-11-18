@@ -369,11 +369,11 @@ form's mailto fallback, the `data-site` fill); if you change one, change both.
 
 | | Current value |
 |---|---|
-| Practitioner | Poonam Mahendra |
+| Practitioner | The Practitioner |
 | Practice | Still Point |
 | Address | MG Road, Worli, Mumbai 400098 |
-| Phone | `+91 99878 94488` — dials `tel:+919987894488` |
-| Email | `poonam@craniosacraltherapy.com` |
+| Phone | `` — dials `tel:` |
+| Email | `demo@example.com` |
 | Hours | Tue–Fri 9–6, Sat 9–1, closed Sun–Mon |
 | Fees | ₹4,000–6,000 a session |
 
@@ -644,12 +644,12 @@ insurance before you take money through this practice.
 
 ## Identity
 
-`Poonam Mahendra`, practising in `Mumbai`. Set in `config.js`:
+`The Practitioner`, practising in `Mumbai`. Set in `config.js`:
 
 ```js
-practitioner     : 'Poonam Mahendra',
-practitionerFirst: 'Poonam',      // the portrait headline breaks across two lines
-practitionerLast : 'Mahendra',
+practitioner     : 'The Practitioner',
+practitionerFirst: 'The Practitioner',      // the portrait headline breaks across two lines
+practitionerLast : '',
 city             : 'Mumbai',
 designer         : 'Norman James',
 studio           : 'Empathy Studio',
