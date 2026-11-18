@@ -48,7 +48,29 @@ const ScrollEngine = {
       this.lenis.on('scroll', ScrollTrigger.update);
     }
 
+    this.bindAnchors();
     return this.lenis;
+  },
+
+  bindAnchors () {
+    document.addEventListener('click', e => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+      const link = e.target.closest && e.target.closest('a[href]');
+      if (!link || (link.target && link.target !== '_self') || link.hasAttribute('download')) return;
+
+      const url = new URL(link.href, location.href);
+      if (url.origin !== location.origin || url.pathname !== location.pathname || !url.hash) return;
+
+      const target = document.getElementById(url.hash.slice(1));
+      if (!target) return;
+
+      e.preventDefault();
+      if (location.protocol !== 'file:' && location.hash !== url.hash) {
+        history.pushState(null, '', url.hash);
+      }
+      this.scrollTo(target, { offset: -60, duration: 1.2 });
+    });
   },
 
   /* ---------- layered parallax ------------------------------------------
@@ -132,8 +154,13 @@ const ScrollEngine = {
     ScrollTrigger.refresh();
   },
 
-  scrollTo (target) {
-    if (this.lenis) this.lenis.scrollTo(target);
-    else if (target && target.scrollIntoView) target.scrollIntoView({ behavior: RM ? 'auto' : 'smooth' });
+  scrollTo (target, options = {}) {
+    if (this.lenis) {
+      this.lenis.scrollTo(target, options);
+    } else if (target && target.getBoundingClientRect) {
+      const offset = Number.isFinite(options.offset) ? options.offset : 0;
+      const top = target.getBoundingClientRect().top + window.scrollY + offset;
+      window.scrollTo({ top, behavior: RM ? 'auto' : 'smooth' });
+    }
   }
 };

@@ -17,6 +17,7 @@ const Animations = {
     this.splitHeadings();
     this.revealUp();
     this.revealFade();
+    this.imageReveals();
     this.rules();
     this.counts();
     this.scrubWords();
@@ -90,6 +91,23 @@ const Animations = {
         scrollTrigger: { trigger: el, start: 'top 92%', once: true },
         delay: parseFloat(el.dataset.d || 0)
       });
+    });
+  },
+
+  /* ---------- restrained photographic reveals -------------------------- */
+  imageReveals () {
+    if (RM) return;
+    $$('[data-image-reveal]').forEach(el => {
+      gsap.fromTo(el,
+        { opacity: .8, scale: 1.025 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 1.5,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+        }
+      );
     });
   },
 
